@@ -987,6 +987,7 @@ position:relative;
 .review-media video{max-width:100%;border-radius:8px}
 
 /* Floating WhatsApp button positioning */
+.whatsapp,
 .whatsapp-float {
 	position: fixed !important;
 	right: 20px !important;
