@@ -334,51 +334,6 @@ closeGalleryModalView();
 }
 });
 
-// ==========================================
-// SHIFTMATE FIXED WHATSAPP BUTTON
-// ==========================================
-
-const whatsappButton = document.createElement("a");
-
-whatsappButton.href = "https://wa.me/917318294180";
-whatsappButton.target = "_blank";
-whatsappButton.rel = "noopener noreferrer";
-whatsappButton.setAttribute(
-    "aria-label",
-    "Chat with ShiftMate on WhatsApp"
-);
-
-whatsappButton.innerHTML = '<i class="fab fa-whatsapp"></i>';
-
-// Force fixed position on the SCREEN
-whatsappButton.style.cssText = `
-    position: fixed !important;
-    left: 25px !important;
-    bottom: 25px !important;
-
-    width: 60px !important;
-    height: 60px !important;
-
-    background: #25D366 !important;
-    color: #ffffff !important;
-
-    border-radius: 50% !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    font-size: 32px !important;
-    text-decoration: none !important;
-
-    z-index: 999999 !important;
-
-    box-shadow: 0 5px 18px rgba(0,0,0,0.30) !important;
-
-    cursor: pointer !important;
-`;
-
-document.body.appendChild(whatsappButton);
 
 // FAQ question modal handlers
 const openQuestionBtn = document.getElementById('openQuestionBtn');
