@@ -980,7 +980,7 @@ position:relative;
 
     text-decoration: none !important;
 
-    z-index: 2147483647 !important;
+    z-index: 999999 !important;
 
     box-shadow: 0 5px 18px rgba(0,0,0,0.30) !important;
 
