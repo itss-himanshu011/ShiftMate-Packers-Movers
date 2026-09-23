@@ -67,31 +67,38 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             )
 
-            .then(function (response) {
+           .then(function (response) {
 
-                if (!response.ok) {
-                    throw new Error("Submission failed");
-                }
+    if (!response.ok) {
+        throw new Error("Submission failed");
+    }
 
-                return response.json();
+    return response.json();
 
-            })
+})
 
-            .then(function () {
+.then(function (data) {
 
-                /*
-                This flag allows thankyou.html to open
-                ONLY after successful form submission.
-                */
+    if (data.success === true) {
 
-                sessionStorage.setItem(
-                    "shiftmateSubmitted",
-                    "1"
-                );
+        sessionStorage.setItem(
+            "shiftmateSubmitted",
+            "1"
+        );
 
-                window.location.href = "thankyou.html";
+        window.location.replace(
+            "thankyou.html"
+        );
 
-            })
+    } else {
+
+        throw new Error(
+            "Form was not submitted"
+        );
+
+    }
+
+})
 
             .catch(function () {
 
