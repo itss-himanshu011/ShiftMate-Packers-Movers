@@ -16,68 +16,12 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<link rel="stylesheet"
-href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
 
 </head>
 
 <body>
 
-<!-- ================= MAP MODAL ================= -->
-
-<div id="mapModal" class="map-modal" aria-hidden="true">
-
-    <div class="map-modal-content">
-
-        <div class="map-modal-header">
-
-            <h3>Select Location</h3>
-
-            <button type="button"
-                    id="closeMapModal"
-                    class="close-map-modal">
-                ×
-            </button>
-
-        </div>
-
-        <div class="map-search-wrap">
-
-            <div class="map-search-row">
-
-                <input
-                    type="text"
-                    id="mapSearchInput"
-                    class="map-search-input"
-                    placeholder="Search address, area, city or place..."
-                    autocomplete="off">
-
-                <button
-                    type="button"
-                    id="mapSearchBtn"
-                    class="map-search-btn">
-
-                    <i class="fa-solid fa-magnifying-glass"></i>
-
-                </button>
-
-            </div>
-
-            <div id="mapSearchResults"
-                 class="map-search-results">
-            </div>
-
-        </div>
-
-        <div id="map"></div>
-
-        <p class="map-help">
-            Search a location above or tap anywhere on the map to select it.
-        </p>
-
-    </div>
-
-</div>
 
 
 <!-- ================= HEADER ================= -->
@@ -1067,8 +1011,7 @@ All Rights Reserved.
     ></i>
 </a>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-</script>
+
 
 <script src="script.js">
 </script>
