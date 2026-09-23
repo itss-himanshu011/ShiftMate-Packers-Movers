@@ -1,604 +1,1667 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShiftMate Packers & Movers</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+    <title>ShiftMate Packers & Movers | Safe, Fast & Affordable</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="description"
+        content="ShiftMate Packers & Movers provides safe, fast and affordable home shifting, office relocation and vehicle transport services across India.">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Leaflet -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
 
 </head>
 
 <body>
 
+<!-- =========================
+     MAP MODAL
+========================= -->
+
 <div id="mapModal" class="map-modal" aria-hidden="true">
+
     <div class="map-modal-content">
+
         <div class="map-modal-header">
-            <h3>Select Pickup Location on Map</h3>
-            <button type="button" id="closeMapModal" class="close-map-modal">×</button>
+
+            <div>
+                <span class="small-label">LOCATION PICKER</span>
+                <h3>Select Moving Location</h3>
+            </div>
+
+            <button
+                type="button"
+                id="closeMapModal"
+                class="close-map-modal"
+                aria-label="Close map">
+                ×
+            </button>
+
         </div>
+
+        <div class="map-search-area">
+
+            <div class="map-search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="mapSearchInput"
+                    placeholder="Search address, area, city or place..."
+                    autocomplete="off"
+                >
+
+                <button
+                    type="button"
+                    id="mapSearchBtn">
+                    Search
+                </button>
+
+            </div>
+
+            <div
+                id="mapSearchResults"
+                class="map-search-results">
+            </div>
+
+        </div>
+
         <div id="map"></div>
-        <p class="map-help">Tap anywhere on the map to use that location as your pickup address.</p>
+
+        <p class="map-help">
+            <i class="fa-solid fa-location-dot"></i>
+            Search for a place above or tap anywhere on the map.
+        </p>
+
     </div>
+
 </div>
+
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
-<nav>
+    <nav>
 
-<div class="logo">
-<img src="logo.png" alt="ShiftMate logo">
-</div>
+        <div class="logo">
+            <a href="#">
+                <img
+                    src="logo.png"
+                    alt="ShiftMate Packers & Movers Logo">
+            </a>
+        </div>
 
-<ul class="nav-links">
+        <ul class="nav-links">
 
-<li><a href="#">Home</a></li>
+            <li><a href="#">Home</a></li>
 
-<li><a href="#about">About</a></li>
+            <li><a href="#about">About</a></li>
 
-<li><a href="#services">Services</a></li>
+            <li><a href="#services">Services</a></li>
 
-<li><a href="#gallery">Gallery</a></li>
+            <li><a href="#gallery">Gallery</a></li>
 
-<li><a href="#why-choose">Why Choose Us</a></li>
+            <li><a href="#why-choose">Why Us</a></li>
 
-<li><a href="#service-area">Service Area</a></li>
+            <li><a href="#service-area">Areas</a></li>
 
-<li><a href="#faq">FAQ</a></li>
+            <li><a href="#faq">FAQ</a></li>
 
-<li><a href="#contact">Contact</a></li>
+            <li><a href="#contact">Contact</a></li>
 
-</ul>
+        </ul>
 
-<a href="tel:+917318294180" class="call-btn">
-<i class="fa-solid fa-phone"></i>
-Call Now
-</a>
+        <a
+            href="tel:+917318294180"
+            class="call-btn">
 
-</nav>
+            <i class="fa-solid fa-phone"></i>
+            <span>Call</span>
+
+        </a>
+
+    </nav>
 
 </header>
 
-<section class="hero">
 
-<div class="hero-text">
+<!-- =========================
+     HERO
+========================= -->
 
-<h1>Shift Your Home With Confidence</h1>
+<section class="hero" id="home">
 
-<p>
-Professional Packers & Movers providing safe,
-fast and affordable relocation services across India.
-</p>
+    <div class="hero-text">
 
-<div class="hero-buttons">
+        <div class="hero-badge">
+            <i class="fa-solid fa-shield-heart"></i>
+            Trusted Relocation Services
+        </div>
 
-<a href="#contact" class="btn1">Get Free Quote</a>
+        <h1>
+            Shift Your Home
+            <span>With Confidence.</span>
+        </h1>
 
-<a href="tel:+917318294180" class="btn2">Call 7318294180</a>
+        <p>
+            Professional Packers & Movers providing safe,
+            fast and affordable relocation services across India.
+        </p>
 
-</div>
+        <div class="hero-buttons">
 
-</div>
-<div class="hero-image">
-    <img src="homepage.png" alt="ShiftMate Packers and Movers">
-</div>
+            <a
+                href="#contact"
+                class="btn1">
 
-</section>
+                <i class="fa-solid fa-file-invoice"></i>
+                Get Free Quote
 
-<section class="services" id="services">
+            </a>
 
-<h2>Our Services</h2>
+            <a
+                href="tel:+917318294180"
+                class="btn2">
 
-<div class="service-box">
+                <i class="fa-solid fa-phone"></i>
+                Call 7318294180
 
-<div class="card">
-<i class="fa-solid fa-house"></i>
-<h3>House Shifting</h3>
-<p>Safe and secure household relocation services.</p>
-</div>
+            </a>
 
-<div class="card">
-<i class="fa-solid fa-building"></i>
-<h3>Office Relocation</h3>
-<p>Professional office shifting with minimum downtime.</p>
-</div>
+        </div>
 
-<div class="card">
-<i class="fa-solid fa-truck"></i>
-<h3>Vehicle Transport</h3>
-<p>Car and bike transportation across India.</p>
-</div>
+        <div class="hero-trust">
 
-<div class="card">
-<i class="fa-solid fa-box-open"></i>
-<h3>Packing & Unpacking</h3>
-<p>Premium quality packing materials and experts.</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="gallery-section" id="gallery">
-<h2>Gallery</h2>
-<div class="gallery-container">
-<div class="gallery-item featured-gallery-item">
-<img src="homepage.png" alt="ShiftMate homepage gallery image">
-</div>
-<div class="gallery-item">
-<img src="gallery1.png" alt="ShiftMate gallery image 1">
-</div>
-<div class="gallery-item">
-<img src="gallery2.png" alt="ShiftMate gallery image 2">
-</div>
-<div class="gallery-item">
-<img src="gallery3.png" alt="ShiftMate gallery image 3">
-</div>
-<div class="gallery-item">
-<img src="gallery4.png" alt="ShiftMate gallery image 4">
-</div>
-<div class="gallery-item">
-<img src="gallery5.png" alt="ShiftMate gallery image 5">
-</div>
-</div>
-</section>
-
-<div id="galleryModal" class="gallery-modal" aria-hidden="true">
-<div class="gallery-modal-content">
-<button type="button" id="closeGalleryModal" class="close-gallery-modal">×</button>
-<img id="galleryModalImage" src="" alt="Expanded gallery image">
-</div>
-</div>
-
-<section class="testimonials" id="reviews">
-
-<h2>What Our Customers Say</h2>
-
-<div class="review-actions">
-        <button id="openReviewBtn" class="btn1">Leave a Review</button>
-</div>
-
-<div class="testimonial-container" id="reviewsList">
-
-<div class="testimonial-card">
-
-
-</div>
-
-</section>
-
-<!-- Review modal -->
-<div id="reviewModal" class="review-modal" aria-hidden="true">
-    <div class="review-modal-content">
-        <button type="button" id="closeReviewModal" class="close-review-modal">×</button>
-        <h3>Leave a Review</h3>
-        <form id="reviewForm">
-            <input type="text" id="reviewName" name="name" placeholder="Your name" required>
-            <input type="text" id="reviewCity" name="city" placeholder="City" required>
-            <div class="star-input" id="reviewStars" aria-label="Rating">
-                <button type="button" class="star" data-value="1">☆</button>
-                <button type="button" class="star" data-value="2">☆</button>
-                <button type="button" class="star" data-value="3">☆</button>
-                <button type="button" class="star" data-value="4">☆</button>
-                <button type="button" class="star" data-value="5">☆</button>
+            <div>
+                <i class="fa-solid fa-circle-check"></i>
+                Safe Handling
             </div>
-            <textarea id="reviewText" name="text" placeholder="Write your review" required></textarea>
 
-            <label for="reviewFiles">Upload photos or video (optional)</label>
-            <input type="file" id="reviewFiles" name="reviewFiles[]" accept="image/*,video/*" multiple>
-            <div id="reviewFilesPreview" class="preview-grid"></div>
-            <button type="submit" class="btn1">Submit Review</button>
-        </form>
+            <div>
+                <i class="fa-solid fa-circle-check"></i>
+                On-Time Service
+            </div>
+
+            <div>
+                <i class="fa-solid fa-circle-check"></i>
+                All India
+            </div>
+
+        </div>
+
     </div>
-</div>
 
-<section class="why-choose" id="why-choose">
 
-<h2>Why Choose ShiftMate</h2>
+    <div class="hero-image">
 
-<div class="why-grid">
+        <div class="hero-image-card">
 
-<div class="why-card">
-<i class="fa-solid fa-shield-halved"></i>
-<h3>Safe Handling</h3>
-<p>We treat every item with care and use professional packing methods for damage-free shifting.</p>
-</div>
+            <img
+                src="homepage.png"
+                alt="ShiftMate Packers and Movers">
 
-<div class="why-card">
-<i class="fa-solid fa-clock"></i>
-<h3>On-Time Delivery</h3>
-<p>Our team works with a strict schedule to make sure your move is completed on time.</p>
-</div>
+            <div class="hero-image-tag">
 
-<div class="why-card">
-<i class="fa-solid fa-indian-rupee-sign"></i>
-<h3>Affordable Pricing</h3>
-<p>Transparent rates, flexible service plans, and honest pricing for every relocation need.</p>
-</div>
+                <i class="fa-solid fa-truck-fast"></i>
 
-<div class="why-card">
-<i class="fa-solid fa-headset"></i>
-<h3>Dedicated Support</h3>
-<p>Friendly customer assistance from booking to delivery so you stay informed throughout the move.</p>
-</div>
+                <span>
+                    <strong>Move Smarter</strong>
+                    <small>Move with ShiftMate</small>
+                </span>
 
-</div>
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
-<section class="service-area" id="service-area">
 
-<h2>Service Area</h2>
+<!-- =========================
+     QUICK TRUST BAR
+========================= -->
 
-<div class="area-grid">
-<div class="area-card">Delhi NCR</div>
-<div class="area-card">Noida</div>
-<div class="area-card">Gurugram</div>
-<div class="area-card">Faridabad</div>
-<div class="area-card">Chandigarh</div>
-<div class="area-card">Punjab</div>
-<div class="area-card">Haryana</div>
-<div class="area-card">Uttar Pradesh</div>
-<div class="area-card">Jaipur</div>
-<div class="area-card">Rajasthan</div>
-<div class="area-card">All India</div>
-</div>
+<section class="trust-strip">
 
+    <div class="trust-item">
+        <i class="fa-solid fa-box"></i>
+        <span>
+            <strong>Professional Packing</strong>
+            <small>Careful handling</small>
+        </span>
+    </div>
 
-</section>
+    <div class="trust-item">
+        <i class="fa-solid fa-truck"></i>
+        <span>
+            <strong>Reliable Transport</strong>
+            <small>Safe movement</small>
+        </span>
+    </div>
 
-<section class="faq-section" id="faq">
+    <div class="trust-item">
+        <i class="fa-solid fa-headset"></i>
+        <span>
+            <strong>Customer Support</strong>
+            <small>We're here to help</small>
+        </span>
+    </div>
 
-<h2>Frequently Asked Questions</h2>
-
-<div class="faq-list">
-<details open>
-<summary>How do I get a free quote?</summary>
-<p>Fill the contact form with your moving details and our team will connect with you quickly.</p>
-</details>
-
-<details>
-<summary>Do you provide packing material?</summary>
-<p>Yes, we provide quality packing supplies for homes, offices, and vehicle relocation.</p>
-</details>
-
-<details>
-<summary>Can I upload my photos and videos?</summary>
-<p>Yes, the form allows you to upload photos and video files related to your move.</p>
-</details>
-
-<details>
-<summary>Do you handle office relocation?</summary>
-<p>Yes, we provide professional office shifting with careful handling and minimum downtime.</p>
-</details>
-</div>
-
-<div class="faq-actions">
-    <button id="openQuestionBtn" class="btn1">Ask a Question</button>
-</div>
+    <div class="trust-item">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>
+            <strong>Pan India Service</strong>
+            <small>Multiple locations</small>
+        </span>
+    </div>
 
 </section>
 
-<!-- Question modal -->
-<div id="questionModal" class="question-modal" aria-hidden="true">
+
+<!-- =========================
+     SERVICES
+========================= -->
+
+<section
+    class="services"
+    id="services">
+
+    <div class="section-heading">
+
+        <span>WHAT WE DO</span>
+
+        <h2>Our Services</h2>
+
+        <p>
+            Complete relocation solutions designed to make
+            your move easier and stress-free.
+        </p>
+
+    </div>
+
+
+    <div class="service-box">
+
+        <div class="card">
+
+            <div class="card-icon">
+                <i class="fa-solid fa-house"></i>
+            </div>
+
+            <h3>House Shifting</h3>
+
+            <p>
+                Safe and secure household relocation services
+                with careful packing and transportation.
+            </p>
+
+            <a href="#contact">
+                Get Quote <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                <i class="fa-solid fa-building"></i>
+            </div>
+
+            <h3>Office Relocation</h3>
+
+            <p>
+                Professional office shifting with organized
+                packing and minimum downtime.
+            </p>
+
+            <a href="#contact">
+                Get Quote <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                <i class="fa-solid fa-car"></i>
+            </div>
+
+            <h3>Vehicle Transport</h3>
+
+            <p>
+                Reliable car and bike transportation services
+                across different cities in India.
+            </p>
+
+            <a href="#contact">
+                Get Quote <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
+
+            <h3>Packing & Unpacking</h3>
+
+            <p>
+                Quality packing materials and experienced
+                professionals for safer shifting.
+            </p>
+
+            <a href="#contact">
+                Get Quote <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section
+    class="about"
+    id="about">
+
+    <div class="about-content">
+
+        <div class="about-text">
+
+            <span class="section-kicker">
+                ABOUT SHIFTMATE
+            </span>
+
+            <h2>
+                Moving Made
+                <span>Simple.</span>
+            </h2>
+
+            <p>
+                ShiftMate Packers & Movers provides reliable,
+                safe and affordable relocation services for
+                homes, offices and vehicles.
+            </p>
+
+            <p>
+                Our experienced team focuses on careful handling,
+                organized transportation and customer support
+                throughout your relocation journey.
+            </p>
+
+            <div class="about-points">
+
+                <div>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Careful Handling
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Transparent Service
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Customer Support
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Flexible Moving Solutions
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="about-card">
+
+            <i class="fa-solid fa-truck-fast"></i>
+
+            <h3>Ready to Move?</h3>
+
+            <p>
+                Tell us where you're moving from and where
+                you're moving to.
+            </p>
+
+            <a
+                href="#contact"
+                class="olive-button">
+
+                Get Free Quote
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<section
+    class="stats-section"
+    id="stats">
+
+    <div class="section-heading">
+
+        <span>SHIFT WITH CONFIDENCE</span>
+
+        <h2>ShiftMate in Numbers</h2>
+
+    </div>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <i class="fa-solid fa-truck-moving"></i>
+            <h3>500+</h3>
+            <p>Successful Moves</p>
+        </div>
+
+        <div class="stat-card">
+            <i class="fa-solid fa-users"></i>
+            <h3>50+</h3>
+            <p>Dedicated Team Members</p>
+        </div>
+
+        <div class="stat-card">
+            <i class="fa-solid fa-clock"></i>
+            <h3>24/7</h3>
+            <p>Customer Support</p>
+        </div>
+
+        <div class="stat-card">
+            <i class="fa-solid fa-heart"></i>
+            <h3>100%</h3>
+            <p>Customer Focus</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     GALLERY
+========================= -->
+
+<section
+    class="gallery-section"
+    id="gallery">
+
+    <div class="section-heading">
+
+        <span>OUR WORK</span>
+
+        <h2>Gallery</h2>
+
+        <p>
+            A glimpse of the ShiftMate experience.
+        </p>
+
+    </div>
+
+    <div class="gallery-container">
+
+        <div class="gallery-item featured-gallery-item">
+            <img
+                src="homepage.png"
+                alt="ShiftMate moving service">
+        </div>
+
+        <div class="gallery-item">
+            <img
+                src="gallery1.png"
+                alt="ShiftMate gallery image 1">
+        </div>
+
+        <div class="gallery-item">
+            <img
+                src="gallery2.png"
+                alt="ShiftMate gallery image 2">
+        </div>
+
+        <div class="gallery-item">
+            <img
+                src="gallery3.png"
+                alt="ShiftMate gallery image 3">
+        </div>
+
+        <div class="gallery-item">
+            <img
+                src="gallery4.png"
+                alt="ShiftMate gallery image 4">
+        </div>
+
+        <div class="gallery-item">
+            <img
+                src="gallery5.png"
+                alt="ShiftMate gallery image 5">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GALLERY MODAL -->
+
+<div
+    id="galleryModal"
+    class="gallery-modal"
+    aria-hidden="true">
+
+    <div class="gallery-modal-content">
+
+        <button
+            type="button"
+            id="closeGalleryModal"
+            class="close-gallery-modal">
+            ×
+        </button>
+
+        <img
+            id="galleryModalImage"
+            src=""
+            alt="Expanded gallery image">
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     WHY CHOOSE US
+========================= -->
+
+<section
+    class="why-choose"
+    id="why-choose">
+
+    <div class="section-heading">
+
+        <span>WHY SHIFTMATE</span>
+
+        <h2>Why Choose Us?</h2>
+
+    </div>
+
+    <div class="why-grid">
+
+        <div class="why-card">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <h3>Safe Handling</h3>
+
+            <p>
+                We treat every item with care and use
+                professional packing methods.
+            </p>
+
+        </div>
+
+        <div class="why-card">
+
+            <i class="fa-solid fa-clock"></i>
+
+            <h3>On-Time Delivery</h3>
+
+            <p>
+                Organized scheduling helps keep your
+                relocation on track.
+            </p>
+
+        </div>
+
+        <div class="why-card">
+
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+
+            <h3>Affordable Pricing</h3>
+
+            <p>
+                Transparent rates and flexible service
+                options for your moving needs.
+            </p>
+
+        </div>
+
+        <div class="why-card">
+
+            <i class="fa-solid fa-headset"></i>
+
+            <h3>Dedicated Support</h3>
+
+            <p>
+                Customer assistance from enquiry through
+                the relocation process.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SERVICE AREA
+========================= -->
+
+<section
+    class="service-area"
+    id="service-area">
+
+    <div class="section-heading">
+
+        <span>WHERE WE SERVE</span>
+
+        <h2>Service Areas</h2>
+
+        <p>
+            Relocation support across cities and regions in India.
+        </p>
+
+    </div>
+
+    <div class="area-grid">
+
+        <div class="area-card">
+            <i class="fa-solid fa-location-dot"></i>
+            Delhi NCR
+        </div>
+
+        <div class="area-card">
+            <i class="fa-solid fa-location-dot"></i>
+            Noida
+        </div>
+
+        <div class="area-card">
+            <i class="fa-solid fa-location-dot"></i>
+            Gurugram
+        </div>
+
+        <div class="area-card">
+            <i class="fa-solid fa-location-dot"></i>
+            Faridabad
+        </div>
+
+        <div class="area-card">
+            <i class="fa-solid fa-location-dot"></i>
+            Chandigarh
+        </div>
+
+        <div class="area-card">
+            <i class="fa-solid fa-location-dot"></i>
+            Punjab
+        </div>
+
+        <div class="area-card">
+            <i class="fa-solid fa-location-dot"></i>
+            Haryana
+        </div>
+
+        <div class="area-card">
+            <i class="fa-solid fa-location-dot"></i>
+            Uttar Pradesh
+        </div>
+
+        <div class="area-card">
+            <i class="fa-solid fa-location-dot"></i>
+            Jaipur
+        </div>
+
+        <div class="area-card">
+            <i class="fa-solid fa-location-dot"></i>
+            Rajasthan
+        </div>
+
+        <div class="area-card">
+            <i class="fa-solid fa-earth-asia"></i>
+            All India
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     REVIEWS
+========================= -->
+
+<section
+    class="testimonials"
+    id="reviews">
+
+    <div class="section-heading">
+
+        <span>CUSTOMER FEEDBACK</span>
+
+        <h2>What Our Customers Say</h2>
+
+        <p>
+            Share your experience with ShiftMate.
+        </p>
+
+    </div>
+
+    <div class="review-actions">
+
+        <button
+            id="openReviewBtn"
+            class="olive-button">
+
+            <i class="fa-solid fa-star"></i>
+            Leave a Review
+
+        </button>
+
+    </div>
+
+    <div
+        class="testimonial-container"
+        id="reviewsList">
+
+        <div class="testimonial-empty">
+
+            <i class="fa-regular fa-comment-dots"></i>
+
+            <h3>Your experience matters</h3>
+
+            <p>
+                Be the first to share your ShiftMate experience.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- REVIEW MODAL -->
+
+<div
+    id="reviewModal"
+    class="review-modal"
+    aria-hidden="true">
+
+    <div class="review-modal-content">
+
+        <button
+            type="button"
+            id="closeReviewModal"
+            class="modal-close">
+            ×
+        </button>
+
+        <div class="modal-heading">
+
+            <i class="fa-solid fa-star"></i>
+
+            <h3>Leave a Review</h3>
+
+            <p>
+                Tell us about your experience.
+            </p>
+
+        </div>
+
+        <form id="reviewForm">
+
+            <input
+                type="text"
+                id="reviewName"
+                name="name"
+                placeholder="Your Name"
+                required>
+
+            <input
+                type="text"
+                id="reviewCity"
+                name="city"
+                placeholder="City"
+                required>
+
+            <label class="field-label">
+                Your Rating
+            </label>
+
+            <div
+                class="star-input"
+                id="reviewStars">
+
+                <button
+                    type="button"
+                    class="star"
+                    data-value="1">☆</button>
+
+                <button
+                    type="button"
+                    class="star"
+                    data-value="2">☆</button>
+
+                <button
+                    type="button"
+                    class="star"
+                    data-value="3">☆</button>
+
+                <button
+                    type="button"
+                    class="star"
+                    data-value="4">☆</button>
+
+                <button
+                    type="button"
+                    class="star"
+                    data-value="5">☆</button>
+
+            </div>
+
+            <textarea
+                id="reviewText"
+                name="text"
+                placeholder="Write your review..."
+                required></textarea>
+
+            <label
+                for="reviewFiles"
+                class="field-label">
+
+                Upload Photos / Video
+                <span>(Optional)</span>
+
+            </label>
+
+            <input
+                type="file"
+                id="reviewFiles"
+                name="reviewFiles[]"
+                accept="image/*,video/*"
+                multiple>
+
+            <div
+                id="reviewFilesPreview"
+                class="preview-grid">
+            </div>
+
+            <button
+                type="submit"
+                class="olive-submit">
+
+                Submit Review
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FAQ
+========================= -->
+
+<section
+    class="faq-section"
+    id="faq">
+
+    <div class="section-heading">
+
+        <span>NEED HELP?</span>
+
+        <h2>Frequently Asked Questions</h2>
+
+    </div>
+
+    <div class="faq-list">
+
+        <details open>
+
+            <summary>
+                How do I get a free quote?
+                <i class="fa-solid fa-plus"></i>
+            </summary>
+
+            <p>
+                Fill the contact form with your moving details
+                and our team will connect with you.
+            </p>
+
+        </details>
+
+        <details>
+
+            <summary>
+                Do you provide packing material?
+                <i class="fa-solid fa-plus"></i>
+            </summary>
+
+            <p>
+                Yes, packing supplies can be arranged for
+                home, office and vehicle relocation needs.
+            </p>
+
+        </details>
+
+        <details>
+
+            <summary>
+                Can I upload photos and videos?
+                <i class="fa-solid fa-plus"></i>
+            </summary>
+
+            <p>
+                Yes. The quote form allows you to upload
+                photos and a video related to your move.
+            </p>
+
+        </details>
+
+        <details>
+
+            <summary>
+                Do you handle office relocation?
+                <i class="fa-solid fa-plus"></i>
+            </summary>
+
+            <p>
+                Yes, ShiftMate provides professional office
+                relocation support.
+            </p>
+
+        </details>
+
+    </div>
+
+    <div class="faq-actions">
+
+        <button
+            id="openQuestionBtn"
+            class="olive-button">
+
+            <i class="fa-regular fa-circle-question"></i>
+            Ask a Question
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- QUESTION MODAL -->
+
+<div
+    id="questionModal"
+    class="question-modal"
+    aria-hidden="true">
+
     <div class="question-modal-content">
-        <button type="button" id="closeQuestionModal" class="close-question-modal">×</button>
-        <h3>Ask a Question</h3>
+
+        <button
+            type="button"
+            id="closeQuestionModal"
+            class="modal-close">
+            ×
+        </button>
+
+        <div class="modal-heading">
+
+            <i class="fa-regular fa-circle-question"></i>
+
+            <h3>Ask a Question</h3>
+
+            <p>
+                Your question will be sent to ShiftMate.
+            </p>
+
+        </div>
+
         <form id="questionForm">
-            <input type="text" id="qName" name="name" placeholder="Your name" required>
-            <input type="email" id="qEmail" name="email" placeholder="Your email" required>
-            <textarea id="qText" name="question" placeholder="Your question" required></textarea>
-            <button type="submit" class="btn1">Submit Question</button>
+
+            <input
+                type="text"
+                id="qName"
+                name="name"
+                placeholder="Your Name"
+                required>
+
+            <input
+                type="email"
+                id="qEmail"
+                name="email"
+                placeholder="Your Email"
+                required>
+
+            <textarea
+                id="qText"
+                name="question"
+                placeholder="Type your question..."
+                required></textarea>
+
+            <button
+                type="submit"
+                class="olive-submit">
+
+                <i class="fa-solid fa-paper-plane"></i>
+                Send Question
+
+            </button>
+
         </form>
+
     </div>
+
 </div>
 
 
+<!-- =========================
+     CONTACT
+========================= -->
 
-<section class="about" id="about">
+<section
+    class="contact-section"
+    id="contact">
 
-<h2>About ShiftMate</h2>
+    <div class="contact-wrapper">
 
-<p>
+        <div class="contact-intro">
 
-ShiftMate Packers & Movers provides reliable,
-safe and affordable relocation services for homes,
-offices and vehicles. Our experienced team ensures
-damage-free moving with complete customer satisfaction.
+            <span class="section-kicker">
+                LET'S GET YOU MOVING
+            </span>
 
-</p>
-    
+            <h2>
+                Get Your
+                <span>Free Quote</span>
+            </h2>
+
+            <p>
+                Share your moving details and our team will
+                contact you with the next steps.
+            </p>
+
+            <div class="contact-mini-cards">
+
+                <a
+                    href="tel:+917318294180"
+                    class="contact-mini-card">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    <span>
+                        <small>Call Us</small>
+                        <strong>+91 7318294180</strong>
+                    </span>
+
+                </a>
+
+                <a
+                    href="mailto:shiftmate011@gmail.com"
+                    class="contact-mini-card">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <span>
+                        <small>Email Us</small>
+                        <strong>shiftmate011@gmail.com</strong>
+                    </span>
+
+                </a>
+
+            </div>
+
+            <div class="branch-card">
+
+                <div class="branch-icon">
+                    <i class="fa-solid fa-building"></i>
+                </div>
+
+                <div>
+
+                    <span>Main Branch</span>
+
+                    <strong>Lucknow</strong>
+
+                    <p>
+                        102, 14/121, Shivajipuram near
+                        Kailash Lawn, Indira Nagar,
+                        Lucknow – 226016
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUOTE FORM -->
+
+        <div class="quote-card">
+
+            <div class="quote-card-heading">
+
+                <span>QUICK ENQUIRY</span>
+
+                <h3>Tell Us About Your Move</h3>
+
+                <p>
+                    Fields marked with * are required.
+                </p>
+
+            </div>
+
+            <form
+                id="quoteForm"
+                action="https://formsubmit.co/ajax/shiftmate011@gmail.com"
+                method="POST"
+                enctype="multipart/form-data">
+
+                <div class="form-grid">
+
+                    <div class="form-field">
+
+                        <label>
+                            Your Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Enter your name"
+                            required>
+
+                    </div>
+
+                    <div class="form-field">
+
+                        <label>
+                            Email *
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+                    <div class="form-field">
+
+                        <label>
+                            Phone Number *
+                        </label>
+
+                        <input
+                            type="tel"
+                            name="phone"
+                            placeholder="+91 XXXXX XXXXX"
+                            required>
+
+                    </div>
+
+                    <div class="form-field">
+
+                        <label>
+                            Moving Date *
+                        </label>
+
+                        <div class="date-input-wrap">
+
+                            <i class="fa-regular fa-calendar"></i>
+
+                            <input
+                                type="date"
+                                id="movingDate"
+                                name="date"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>
+                        Moving From *
+                    </label>
+
+                    <div class="location-input-row">
+
+                        <input
+                            type="text"
+                            id="from"
+                            name="from"
+                            placeholder="Search or select pickup location"
+                            required>
+
+                        <button
+                            type="button"
+                            data-target="from"
+                            class="map-btn map-target-btn">
+
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            Map
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>
+                        Moving To *
+                    </label>
+
+                    <div class="location-input-row">
+
+                        <input
+                            type="text"
+                            id="to"
+                            name="to"
+                            placeholder="Search or select destination"
+                            required>
+
+                        <button
+                            type="button"
+                            data-target="to"
+                            class="map-btn map-target-btn">
+
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            Map
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>
+                        Tell Us About Your Items
+                    </label>
+
+                    <textarea
+                        name="message"
+                        placeholder="Example: 2 BHK household items, sofa, bed, fridge..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- PHOTO UPLOAD -->
+
+                <div class="upload-group">
+
+                    <label class="upload-label">
+                        Upload Photos
+                    </label>
+
+                    <label
+                        for="photos"
+                        class="upload-box"
+                        id="photos-dropzone">
+
+                        <i class="fa-solid fa-images"></i>
+
+                        <strong>
+                            Tap to choose photos
+                        </strong>
+
+                        <span>
+                            Upload images of your items
+                        </span>
+
+                    </label>
+
+                    <input
+                        id="photos"
+                        type="file"
+                        name="photos"
+                        accept="image/*"
+                        multiple>
+
+                    <div
+                        id="photo-preview"
+                        class="preview-grid">
+                    </div>
+
+                </div>
+
+
+                <!-- VIDEO -->
+
+                <div class="upload-group">
+
+                    <label class="upload-label">
+                        Upload Video
+                        <span>(Optional)</span>
+                    </label>
+
+                    <label
+                        for="video"
+                        class="upload-box"
+                        id="video-dropzone">
+
+                        <i class="fa-solid fa-video"></i>
+
+                        <strong>
+                            Tap to choose a video
+                        </strong>
+
+                        <span>
+                            Optional video of your items
+                        </span>
+
+                    </label>
+
+                    <input
+                        id="video"
+                        type="file"
+                        name="video"
+                        accept="video/*">
+
+                    <div
+                        id="video-file-name"
+                        class="file-name">
+                    </div>
+
+                </div>
+
+
+                <!-- FORMSUBMIT SETTINGS -->
+
+                <input
+                    type="hidden"
+                    name="_subject"
+                    value="New ShiftMate Website Enquiry">
+
+                <input
+                    type="hidden"
+                    name="_template"
+                    value="table">
+
+                <input
+                    type="hidden"
+                    name="_captcha"
+                    value="false">
+
+                <input
+                    type="hidden"
+                    name="_honey"
+                    value="">
+
+                <input
+                    type="hidden"
+                    name="_replyto"
+                    id="quoteReplyTo">
+
+                <button
+                    type="submit"
+                    class="quote-submit">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                    Get Free Quote
+
+                </button>
+
+            </form>
+
+            <div
+                id="quoteSuccess"
+                class="form-success">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <h3>Thank You!</h3>
+
+                <p>
+                    Your enquiry has been sent successfully.
+                    ShiftMate will contact you soon.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
-    
-<section class="stats-section" id="stats">
-
-<h2>ShiftMate in Numbers</h2>
-
-<div class="stats-grid">
-
-<div class="stat-card">
-<h3>500+</h3>
-<p>Successful Moves</p>
-</div>
-
-<div class="stat-card">
-<h3>50+</h3>
-<p>Dedicated Team Members</p>
-</div>
-
-<div class="stat-card">
-<h3>24/7</h3>
-<p>Customer Support</p>
-</div>
-
-<div class="stat-card">
-<h3>100%</h3>
-<p>Customer Satisfaction Focus</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="contact" id="contact">
-
-<h2>Contact Us</h2>
-
-<div class="contact-info">
-
-<p>
-<i class="fa-solid fa-phone"></i>
-+91 7318294180
-</p>
-
-<p>
-<i class="fa-solid fa-envelope"></i>
-shiftmate011@gmail.com
-</p>
-
-</div>
 
 
-
-
-
-<form id="quoteForm" action="https://formsubmit.co/ajax/shiftmate011@gmail.com" method="POST" enctype="multipart/form-data">
-
-<input type="text" name="name" placeholder="Your Name" required>
-
-<input type="email" name="email" placeholder="Your Email" required>
-
-<input type="tel" name="phone" placeholder="Phone Number" required>
-
-<input type="text" id="from" name="from" placeholder="Moving From" required>
-<button type="button" data-target="from" class="map-btn map-target-btn">Select on Map</button>
-
-<input type="text" id="to" name="to" placeholder="Moving To" required>
-<button type="button" data-target="to" class="map-btn map-target-btn">Select on Map</button>
-
-<input type="date" name="date" placeholder="moving date" required >
-
-<textarea name="message" placeholder="Tell us about your item list "></textarea>
-
-<div class="upload-group">
-<label for="photos" class="upload-label">Upload Photos from your Gallery</label>
-<label for="photos" class="upload-box" id="photos-dropzone">
-<i class="fa-solid fa-images"></i>
-<span>Tap to choose images from your gallery</span>
-</label>
-<input id="photos" type="file" name="photos" accept="image/*" multiple>
-<div id="photo-preview" class="preview-grid"></div>
-</div>
-
-<div class="upload-group">
-<label for="video" class="upload-label">Upload a Video (Optional)</label>
-<label for="video" class="upload-box" id="video-dropzone">
-<i class="fa-solid fa-video"></i>
-<span>Tap to choose a video from your gallery</span>
-</label>
-<input id="video" type="file" name="video" accept="video/*">
-<div id="video-file-name" class="file-name"></div>
-</div>
-
-<input type="hidden" name="_subject" value="New ShiftMate Website Enquiry">
-
-<input type="hidden" name="_template" value="table">
-
-<input type="hidden" name="_captcha" value="false">
-
-<input type="hidden" name="_next" value="thankyou.html">
-
-<button type="submit">Get Free Quote</button>
-
-</form>
-
-</section>
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
-<h3>ShiftMate Packers & Movers</h3>
+    <div class="footer-main">
 
-<p>Safe • Fast • Affordable</p>
+        <div class="footer-brand">
 
-<p>Phone : +91 7318294180</p>
+            <img
+                src="logo.png"
+                alt="ShiftMate Logo">
 
-<p>Email : shiftmate011@gmail.com</p>
-<h2>Our Offices</h2>
-<p>
-    <strong>Address:</strong>
-    Hadbast 233, Godown Area, Back Side Upkar Goods TPT,
-    Beside Chandigarh Air Force Wall, Zirakpur,
-    District SAS Nagar, Mohali, Punjab - 140603
-</p>
+            <p>
+                Safe • Fast • Affordable
+            </p>
+
+            <p class="footer-tagline">
+                Making relocation simpler, safer and
+                more comfortable.
+            </p>
+
+            <div class="social-links">
+
+                <a
+                    href="https://www.instagram.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram">
+
+                    <i class="fa-brands fa-instagram"></i>
+
+                </a>
+
+                <a
+                    href="https://wa.me/917318294180"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp">
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                </a>
+
+                <a
+                    href="tel:+917318294180"
+                    aria-label="Call ShiftMate">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                </a>
+
+                <a
+                    href="mailto:shiftmate011@gmail.com"
+                    aria-label="Email ShiftMate">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Quick Links</h3>
+
+            <a href="#">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Contact</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Contact</h3>
+
+            <a href="tel:+917318294180">
+                <i class="fa-solid fa-phone"></i>
+                +91 7318294180
+            </a>
+
+            <a href="mailto:shiftmate011@gmail.com">
+                <i class="fa-solid fa-envelope"></i>
+                shiftmate011@gmail.com
+            </a>
+
+            <span>
+                <i class="fa-solid fa-clock"></i>
+                Customer Support
+            </span>
+
+        </div>
+
+
+        <div class="footer-column footer-office">
+
+            <h3>Main Branch</h3>
+
+            <p>
+                <strong>Lucknow</strong>
+            </p>
+
+            <p>
+                102, 14/121, Shivajipuram near
+                Kailash Lawn, Indira Nagar,
+                Lucknow – 226016
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © <span id="currentYear">2026</span>
+            ShiftMate Packers & Movers.
+            All Rights Reserved.
+        </p>
+
+        <p>
+            Safe • Fast • Affordable
+        </p>
+
+    </div>
+
 </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="script.js"></script>
-<!-- Google Maps API removed -->
 
-<script>
-let mapPicker = null;
-let mapMarker = null;
-let mapPickerTarget = "from";
+<!-- =========================
+     FLOATING WHATSAPP
+========================= -->
 
-function openMapSelector(targetFieldId) {
-    const modal = document.getElementById("mapModal");
-    const mapContainer = document.getElementById("map");
-    if (!modal || !mapContainer) return;
-
-    modal.classList.add("open");
-    modal.setAttribute("aria-hidden", "false");
-    mapPickerTarget = targetFieldId || "from";
-
-    if (!window.L) {
-        alert("Map library is not available right now.");
-        return;
-    }
-
-    if (!mapPicker) {
-        mapPicker = L.map("map", {
-            zoomControl: true
-        }).setView([20.5937, 78.9629], 5);
-
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(mapPicker);
-
-        mapMarker = L.marker([20.5937, 78.9629]).addTo(mapPicker);
-
-        navigator.geolocation.getCurrentPosition(function(position) {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-            mapPicker.setView([lat, lng], 14);
-            mapMarker.setLatLng([lat, lng]);
-        }, function() {
-            // Ignore if the browser denies location access.
-        }, {
-            enableHighAccuracy: true,
-            timeout: 10000,
-            maximumAge: 0
-        });
-
-        mapPicker.on("click", function(event) {
-            const lat = event.latlng.lat;
-            const lng = event.latlng.lng;
-            mapMarker.setLatLng([lat, lng]);
-
-            fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`, {
-                headers: {
-                    "Accept-Language": "en"
-                }
-            })
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(data) {
-                const addr = data.address || {};
-                const addressParts = [
-                    addr.house_number,
-                    addr.road,
-                    addr.neighbourhood,
-                    addr.suburb,
-                    addr.city || addr.town || addr.village,
-                    addr.state,
-                    addr.postcode,
-                    addr.country
-                ].filter(Boolean);
-
-                const address = addressParts.join(", ") || data.display_name || `${lat}, ${lng}`;
-                const targetField = document.getElementById(mapPickerTarget);
-                if (targetField) {
-                    targetField.value = address;
-                }
-
-                modal.classList.remove("open");
-                modal.setAttribute("aria-hidden", "true");
-            })
-            .catch(function() {
-                const targetField = document.getElementById(mapPickerTarget);
-                if (targetField) {
-                    targetField.value = `${lat}, ${lng}`;
-                }
-
-                modal.classList.remove("open");
-                modal.setAttribute("aria-hidden", "true");
-            });
-        });
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    const closeMapModal = document.getElementById("closeMapModal");
-    const modal = document.getElementById("mapModal");
-    const mapButtons = document.querySelectorAll(".map-target-btn");
-
-    mapButtons.forEach(function(button) {
-        button.addEventListener("click", function() {
-            openMapSelector(button.getAttribute("data-target"));
-        });
-    });
-
-    if (closeMapModal && modal) {
-        closeMapModal.addEventListener("click", function() {
-            modal.classList.remove("open");
-            modal.setAttribute("aria-hidden", "true");
-        });
-    }
-
-    if (modal) {
-        modal.addEventListener("click", function(event) {
-            if (event.target === modal) {
-                modal.classList.remove("open");
-                modal.setAttribute("aria-hidden", "true");
-            }
-        });
-    }
-    
-});
-</script>
 <a
     id="whatsappFloat"
     href="https://wa.me/917318294180"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Chat with ShiftMate on WhatsApp"
-    style="
-        position: fixed !important;
-        left: 25px !important;
-        bottom: 25px !important;
-        width: 60px !important;
-        height: 60px !important;
-        min-width: 60px !important;
-        min-height: 60px !important;
-        background: #25D366 !important;
-        border-radius: 50% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        text-decoration: none !important;
-        z-index: 2147483647 !important;
-        box-shadow: 0 5px 18px rgba(0,0,0,.30) !important;
-        overflow: hidden !important;
-    "
->
-    <i
-        class="fa-brands fa-whatsapp"
-        style="
-            font-size: 36px !important;
-            line-height: 1 !important;
-            color: #fff !important;
-            display: block !important;
-        "
-    ></i>
+    aria-label="Chat with ShiftMate on WhatsApp">
+
+    <i class="fa-brands fa-whatsapp"></i>
+
+    <span>Chat</span>
+
 </a>
+
+
+<!-- MOBILE GET QUOTE -->
+
+<a
+    href="#contact"
+    id="mobileQuote">
+
+    <i class="fa-solid fa-file-invoice"></i>
+    Get Free Quote
+
+</a>
+
+
+<!-- LEAFLET -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script src="script.js"></script>
+
 </body>
 </html>
