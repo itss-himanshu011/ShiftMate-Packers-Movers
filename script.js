@@ -1,462 +1,200 @@
-/* =========================================================
-   SHIFTMATE PACKERS & MOVERS
-   MAIN JAVASCRIPT
-========================================================= */
-
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* =====================================================
-       HEADER
-    ===================================================== */
+    /* ================= HEADER ================= */
 
     const header = document.querySelector("header");
 
     window.addEventListener("scroll", function () {
 
-        if (window.scrollY > 30) {
-            header.style.boxShadow =
-                "0 5px 20px rgba(0,0,0,.12)";
+        if (window.scrollY > 50) {
+            header.style.background = "#ffffff";
+            header.style.boxShadow = "0 3px 15px rgba(0,0,0,.12)";
         } else {
-            header.style.boxShadow =
-                "0 2px 15px rgba(0,0,0,.08)";
+            header.style.boxShadow = "0 2px 10px rgba(0,0,0,.08)";
         }
 
     });
 
 
-    /* =====================================================
-       BACK TO TOP
-    ===================================================== */
+    /* ================= DATE ================= */
 
-    const topBtn = document.createElement("button");
+    const dateInput = document.getElementById("movingDate");
 
-    topBtn.id = "backToTop";
-    topBtn.innerHTML = "↑";
-    topBtn.setAttribute("aria-label", "Back to top");
+    if (dateInput) {
 
-    document.body.appendChild(topBtn);
+        const today = new Date();
 
-    window.addEventListener("scroll", function () {
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, "0");
+        const day = String(today.getDate()).padStart(2, "0");
 
-        if (window.scrollY > 400) {
-            topBtn.classList.add("show");
-        } else {
-            topBtn.classList.remove("show");
-        }
-
-    });
-
-    topBtn.addEventListener("click", function () {
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    });
-
-
-    /* =====================================================
-       SCROLL ANIMATION
-    ===================================================== */
-
-    const sections =
-        document.querySelectorAll(
-            "section:not(.hero)"
-        );
-
-    const observer =
-        new IntersectionObserver(
-            function (entries) {
-
-                entries.forEach(function (entry) {
-
-                    if (entry.isIntersecting) {
-
-                        entry.target.style.opacity = "1";
-                        entry.target.style.transform =
-                            "translateY(0)";
-
-                    }
-
-                });
-
-            },
-            {
-                threshold: 0.08
-            }
-        );
-
-    sections.forEach(function (section) {
-
-        section.style.opacity = "0";
-        section.style.transform =
-            "translateY(25px)";
-        section.style.transition =
-            "opacity .7s ease, transform .7s ease";
-
-        observer.observe(section);
-
-    });
-
-
-    /* =====================================================
-       CURRENT YEAR
-    ===================================================== */
-
-    const currentYear =
-        document.getElementById("currentYear");
-
-    if (currentYear) {
-        currentYear.textContent =
-            new Date().getFullYear();
-    }
-
-
-    /* =====================================================
-       DATE PICKER
-    ===================================================== */
-
-    const movingDate =
-        document.getElementById("movingDate");
-
-    if (movingDate) {
-
-        const today =
-            new Date().toISOString().split("T")[0];
-
-        movingDate.min = today;
+        dateInput.min = `${year}-${month}-${day}`;
 
     }
 
 
-    /* =====================================================
-       QUOTE FORM
-    ===================================================== */
+    /* ================= QUOTE FORM ================= */
 
-    const quoteForm =
-        document.getElementById("quoteForm");
-
-    const quoteSuccess =
-        document.getElementById("quoteSuccess");
-
-    const quoteReplyTo =
-        document.getElementById("quoteReplyTo");
+    const quoteForm = document.getElementById("quoteForm");
 
     if (quoteForm) {
 
-        quoteForm.addEventListener(
-            "submit",
-            function (event) {
+        quoteForm.addEventListener("submit", function (event) {
 
-                event.preventDefault();
+            event.preventDefault();
 
-                const email =
-                    quoteForm.querySelector(
-                        'input[name="email"]'
-                    );
+            const submitButton =
+                quoteForm.querySelector('button[type="submit"]');
 
-                if (
-                    email &&
-                    quoteReplyTo
-                ) {
-                    quoteReplyTo.value =
-                        email.value;
+            if (submitButton) {
+
+                submitButton.disabled = true;
+                submitButton.innerHTML =
+                    '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+            }
+
+            const formData = new FormData(quoteForm);
+
+            fetch(
+                "https://formsubmit.co/ajax/kikku20041127@gmail.com",
+                {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                }
+            )
+
+            .then(function (response) {
+
+                if (!response.ok) {
+                    throw new Error("Submission failed");
                 }
 
-                const submitButton =
-                    quoteForm.querySelector(
-                        'button[type="submit"]'
-                    );
+                return response.json();
+
+            })
+
+            .then(function () {
+
+                /*
+                This flag allows thankyou.html to open
+                ONLY after successful form submission.
+                */
+
+                sessionStorage.setItem(
+                    "shiftmateSubmitted",
+                    "1"
+                );
+
+                window.location.href = "thankyou.html";
+
+            })
+
+            .catch(function () {
 
                 if (submitButton) {
 
-                    submitButton.disabled = true;
+                    submitButton.disabled = false;
 
                     submitButton.innerHTML =
-                        '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+                        '<i class="fa-solid fa-paper-plane"></i> Get Free Quote';
 
                 }
 
-                const formData =
-                    new FormData(quoteForm);
+                alert(
+                    "There was a problem sending your request. Please try again."
+                );
 
-                fetch(
-                    "https://formsubmit.co/ajax/shiftmate011@gmail.com",
-                    {
-                        method: "POST",
-                        body: formData,
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
-                    }
-                )
+            });
 
-                .then(function (response) {
-
-                    if (!response.ok) {
-                        throw new Error(
-                            "Submission failed"
-                        );
-                    }
-
-                    return response.json();
-
-                })
-
-                .then(function () {
-
-                    quoteForm.reset();
-
-                    if (quoteSuccess) {
-                        quoteSuccess.classList.add(
-                            "show"
-                        );
-                    }
-
-                    if (submitButton) {
-
-                        submitButton.disabled =
-                            false;
-
-                        submitButton.innerHTML =
-                            '<i class="fa-solid fa-paper-plane"></i> Get Free Quote';
-
-                    }
-
-                    setTimeout(function () {
-
-                        if (quoteSuccess) {
-                            quoteSuccess.classList.remove(
-                                "show"
-                            );
-                        }
-
-                    }, 7000);
-
-                })
-
-                .catch(function () {
-
-                    if (submitButton) {
-
-                        submitButton.disabled =
-                            false;
-
-                        submitButton.innerHTML =
-                            '<i class="fa-solid fa-paper-plane"></i> Get Free Quote';
-
-                    }
-
-                    alert(
-                        "There was a problem sending your enquiry. Please try again."
-                    );
-
-                });
-
-            }
-        );
+        });
 
     }
 
 
-    /* =====================================================
-       PHOTO PREVIEW
-    ===================================================== */
+    /* ================= PHOTO PREVIEW ================= */
 
     const photoInput =
         document.getElementById("photos");
 
     const photoPreview =
-        document.getElementById(
-            "photo-preview"
-        );
+        document.getElementById("photo-preview");
 
-    function renderPhotoPreview(files) {
-
-        if (!photoPreview) return;
-
-        photoPreview.innerHTML = "";
-
-        if (!files || !files.length) {
-            return;
-        }
-
-        Array.from(files).forEach(function (file) {
-
-            if (!file.type.startsWith("image/")) {
-                return;
-            }
-
-            const box =
-                document.createElement("div");
-
-            box.className =
-                "preview-item";
-
-            const img =
-                document.createElement("img");
-
-            img.src =
-                URL.createObjectURL(file);
-
-            img.alt =
-                file.name;
-
-            const name =
-                document.createElement("span");
-
-            name.className =
-                "preview-name";
-
-            name.textContent =
-                file.name;
-
-            box.appendChild(img);
-            box.appendChild(name);
-
-            photoPreview.appendChild(box);
-
-        });
-
-    }
-
-    if (photoInput) {
+    if (photoInput && photoPreview) {
 
         photoInput.addEventListener(
             "change",
             function () {
-                renderPhotoPreview(
-                    this.files
+
+                photoPreview.innerHTML = "";
+
+                Array.from(this.files).forEach(
+                    function (file) {
+
+                        if (!file.type.startsWith("image/")) {
+                            return;
+                        }
+
+                        const box =
+                            document.createElement("div");
+
+                        box.className =
+                            "preview-item";
+
+                        const image =
+                            document.createElement("img");
+
+                        image.src =
+                            URL.createObjectURL(file);
+
+                        image.alt =
+                            file.name;
+
+                        box.appendChild(image);
+
+                        photoPreview.appendChild(box);
+
+                    }
                 );
+
             }
         );
 
     }
 
 
-    /* =====================================================
-       VIDEO PREVIEW
-    ===================================================== */
+    /* ================= VIDEO PREVIEW ================= */
 
     const videoInput =
         document.getElementById("video");
 
-    const videoFileName =
-        document.getElementById(
-            "video-file-name"
-        );
+    const videoName =
+        document.getElementById("video-file-name");
 
-    if (videoInput) {
+    if (videoInput && videoName) {
 
         videoInput.addEventListener(
             "change",
             function () {
 
-                if (!videoFileName) return;
+                videoName.innerHTML = "";
 
-                videoFileName.innerHTML = "";
+                if (this.files.length > 0) {
 
-                if (!this.files.length) {
-                    return;
-                }
+                    const chip =
+                        document.createElement("span");
 
-                Array.from(this.files).forEach(
-                    function (file) {
+                    chip.className =
+                        "file-chip";
 
-                        const chip =
-                            document.createElement(
-                                "span"
-                            );
+                    chip.textContent =
+                        this.files[0].name;
 
-                        chip.textContent =
-                            file.name;
+                    videoName.appendChild(chip);
 
-                        videoFileName.appendChild(
-                            chip
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       DRAG & DROP
-    ===================================================== */
-
-    function setupDropzone(
-        dropzone,
-        input,
-        callback
-    ) {
-
-        if (!dropzone || !input) {
-            return;
-        }
-
-        dropzone.addEventListener(
-            "dragover",
-            function (event) {
-
-                event.preventDefault();
-
-                dropzone.classList.add(
-                    "dragover"
-                );
-
-            }
-        );
-
-        dropzone.addEventListener(
-            "dragleave",
-            function () {
-
-                dropzone.classList.remove(
-                    "dragover"
-                );
-
-            }
-        );
-
-        dropzone.addEventListener(
-            "drop",
-            function (event) {
-
-                event.preventDefault();
-
-                dropzone.classList.remove(
-                    "dragover"
-                );
-
-                const files =
-                    event.dataTransfer.files;
-
-                if (!files.length) {
-                    return;
-                }
-
-                const transfer =
-                    new DataTransfer();
-
-                Array.from(files).forEach(
-                    function (file) {
-                        transfer.items.add(file);
-                    }
-                );
-
-                input.files =
-                    transfer.files;
-
-                if (callback) {
-                    callback(
-                        transfer.files
-                    );
                 }
 
             }
@@ -464,119 +202,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    setupDropzone(
-        document.getElementById(
-            "photos-dropzone"
-        ),
-        photoInput,
-        renderPhotoPreview
-    );
 
-    setupDropzone(
-        document.getElementById(
-            "video-dropzone"
-        ),
-        videoInput,
-        function (files) {
-
-            if (!videoFileName) return;
-
-            videoFileName.textContent =
-                files.length
-                    ? files[0].name
-                    : "";
-
-        }
-    );
-
-
-    /* =====================================================
-       GALLERY
-    ===================================================== */
+    /* ================= GALLERY MODAL ================= */
 
     const galleryModal =
-        document.getElementById(
-            "galleryModal"
-        );
+        document.getElementById("galleryModal");
 
     const galleryModalImage =
-        document.getElementById(
-            "galleryModalImage"
-        );
+        document.getElementById("galleryModalImage");
 
     const closeGalleryModal =
-        document.getElementById(
-            "closeGalleryModal"
-        );
+        document.getElementById("closeGalleryModal");
 
-    document
-        .querySelectorAll(
-            ".gallery-container img"
-        )
-        .forEach(function (img) {
+    document.querySelectorAll(
+        ".gallery-container img"
+    ).forEach(function (image) {
 
-            img.addEventListener(
-                "click",
-                function () {
+        image.addEventListener(
+            "click",
+            function () {
 
-                    if (!galleryModal ||
-                        !galleryModalImage) {
-                        return;
-                    }
-
-                    galleryModalImage.src =
-                        this.src;
-
-                    galleryModal.classList.add(
-                        "show"
-                    );
-
-                    galleryModal.setAttribute(
-                        "aria-hidden",
-                        "false"
-                    );
-
+                if (!galleryModal || !galleryModalImage) {
+                    return;
                 }
-            );
 
-        });
+                galleryModalImage.src =
+                    this.src;
 
-    function closeGallery() {
+                galleryModal.classList.add("show");
 
-        if (!galleryModal) return;
+                galleryModal.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
 
-        galleryModal.classList.remove(
-            "show"
+            }
         );
 
-        galleryModal.setAttribute(
-            "aria-hidden",
-            "true"
-        );
+    });
 
-    }
 
     if (closeGalleryModal) {
 
         closeGalleryModal.addEventListener(
             "click",
-            closeGallery
-        );
+            function () {
 
-    }
+                galleryModal.classList.remove("show");
 
-    if (galleryModal) {
-
-        galleryModal.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    event.target ===
-                    galleryModal
-                ) {
-                    closeGallery();
-                }
+                galleryModal.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
 
             }
         );
@@ -584,74 +261,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =====================================================
-       FAQ
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            ".faq-list details"
-        )
-        .forEach(function (detail) {
-
-            detail.addEventListener(
-                "toggle",
-                function () {
-
-                    if (!detail.open) {
-                        return;
-                    }
-
-                    document
-                        .querySelectorAll(
-                            ".faq-list details"
-                        )
-                        .forEach(
-                            function (other) {
-
-                                if (
-                                    other !== detail
-                                ) {
-                                    other.open =
-                                        false;
-                                }
-
-                            }
-                        );
-
-                }
-            );
-
-        });
-
-
-    /* =====================================================
-       QUESTION MODAL
-    ===================================================== */
-
-    const openQuestionBtn =
-        document.getElementById(
-            "openQuestionBtn"
-        );
+    /* ================= ASK QUESTION ================= */
 
     const questionModal =
-        document.getElementById(
-            "questionModal"
-        );
+        document.getElementById("questionModal");
+
+    const openQuestionBtn =
+        document.getElementById("openQuestionBtn");
 
     const closeQuestionModal =
-        document.getElementById(
-            "closeQuestionModal"
-        );
+        document.getElementById("closeQuestionModal");
 
     const questionForm =
-        document.getElementById(
-            "questionForm"
-        );
+        document.getElementById("questionForm");
+
 
     function openQuestion() {
 
-        if (!questionModal) return;
+        questionModal.classList.add("show");
 
         questionModal.setAttribute(
             "aria-hidden",
@@ -660,9 +287,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
     function closeQuestion() {
 
-        if (!questionModal) return;
+        questionModal.classList.remove("show");
 
         questionModal.setAttribute(
             "aria-hidden",
@@ -671,12 +299,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
     if (openQuestionBtn) {
         openQuestionBtn.addEventListener(
             "click",
             openQuestion
         );
     }
+
 
     if (closeQuestionModal) {
         closeQuestionModal.addEventListener(
@@ -685,28 +315,6 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 
-    if (questionModal) {
-
-        questionModal.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    event.target ===
-                    questionModal
-                ) {
-                    closeQuestion();
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       ASK QUESTION → EMAIL
-    ===================================================== */
 
     if (questionForm) {
 
@@ -716,58 +324,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 event.preventDefault();
 
-                const submitButton =
+                const button =
                     questionForm.querySelector(
                         'button[type="submit"]'
                     );
 
-                if (submitButton) {
-
-                    submitButton.disabled =
-                        true;
-
-                    submitButton.innerHTML =
-                        '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-
-                }
+                button.disabled = true;
+                button.textContent = "Sending...";
 
                 const formData =
-                    new FormData(
-                        questionForm
-                    );
-
-                formData.append(
-                    "_subject",
-                    "New ShiftMate Website Question"
-                );
-
-                formData.append(
-                    "_template",
-                    "table"
-                );
-
-                const email =
-                    document.getElementById(
-                        "qEmail"
-                    );
-
-                if (email) {
-
-                    formData.append(
-                        "_replyto",
-                        email.value
-                    );
-
-                }
+                    new FormData(questionForm);
 
                 fetch(
-                    "https://formsubmit.co/ajax/shiftmate011@gmail.com",
+                    "https://formsubmit.co/ajax/kikku20041127@gmail.com",
                     {
                         method: "POST",
                         body: formData,
                         headers: {
-                            "Accept":
-                                "application/json"
+                            "Accept": "application/json"
                         }
                     }
                 )
@@ -775,9 +349,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(function (response) {
 
                     if (!response.ok) {
-                        throw new Error(
-                            "Question failed"
-                        );
+                        throw new Error("Failed");
                     }
 
                     return response.json();
@@ -786,40 +358,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 .then(function () {
 
-                    closeQuestion();
+                    alert(
+                        "Your question has been sent successfully."
+                    );
 
                     questionForm.reset();
 
-                    if (submitButton) {
+                    closeQuestion();
 
-                        submitButton.disabled =
-                            false;
+                    button.disabled = false;
 
-                        submitButton.innerHTML =
-                            '<i class="fa-solid fa-paper-plane"></i> Send Question';
-
-                    }
-
-                    alert(
-                        "Thank you! Your question has been sent to ShiftMate."
-                    );
+                    button.textContent =
+                        "Submit Question";
 
                 })
 
                 .catch(function () {
 
-                    if (submitButton) {
+                    button.disabled = false;
 
-                        submitButton.disabled =
-                            false;
-
-                        submitButton.innerHTML =
-                            '<i class="fa-solid fa-paper-plane"></i> Send Question';
-
-                    }
+                    button.textContent =
+                        "Submit Question";
 
                     alert(
-                        "There was a problem sending your question. Please try again."
+                        "Unable to send your question. Please try again."
                     );
 
                 });
@@ -830,72 +392,35 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =====================================================
-       REVIEW MODAL
-    ===================================================== */
-
-    const openReviewBtn =
-        document.getElementById(
-            "openReviewBtn"
-        );
+    /* ================= REVIEW MODAL ================= */
 
     const reviewModal =
-        document.getElementById(
-            "reviewModal"
-        );
+        document.getElementById("reviewModal");
+
+    const openReviewBtn =
+        document.getElementById("openReviewBtn");
 
     const closeReviewModal =
-        document.getElementById(
-            "closeReviewModal"
-        );
+        document.getElementById("closeReviewModal");
 
     const reviewForm =
-        document.getElementById(
-            "reviewForm"
-        );
-
-    const reviewStars =
-        document.getElementById(
-            "reviewStars"
-        );
-
-    const reviewsList =
-        document.getElementById(
-            "reviewsList"
-        );
-
-    let reviewRating = 5;
-
-
-    function openReview() {
-
-        if (!reviewModal) return;
-
-        reviewModal.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-
-    }
-
-
-    function closeReview() {
-
-        if (!reviewModal) return;
-
-        reviewModal.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-
-    }
+        document.getElementById("reviewForm");
 
 
     if (openReviewBtn) {
 
         openReviewBtn.addEventListener(
             "click",
-            openReview
+            function () {
+
+                reviewModal.classList.add("show");
+
+                reviewModal.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
+
+            }
         );
 
     }
@@ -905,24 +430,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         closeReviewModal.addEventListener(
             "click",
-            closeReview
-        );
+            function () {
 
-    }
+                reviewModal.classList.remove("show");
 
-
-    if (reviewModal) {
-
-        reviewModal.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    event.target ===
-                    reviewModal
-                ) {
-                    closeReview();
-                }
+                reviewModal.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
 
             }
         );
@@ -930,53 +445,41 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =====================================================
-       REVIEW STARS
-    ===================================================== */
+    /* ================= STAR RATING ================= */
 
-    if (reviewStars) {
+    let reviewRating = 5;
 
-        const stars =
-            reviewStars.querySelectorAll(
-                ".star"
-            );
+    const stars =
+        document.querySelectorAll(
+            "#reviewStars .star"
+        );
 
-        function updateStars() {
+    stars.forEach(function (star) {
 
-            stars.forEach(
-                function (star) {
+        star.addEventListener(
+            "click",
+            function () {
 
-                    const value =
-                        Number(
-                            star.dataset.value
-                        );
+                reviewRating =
+                    Number(this.dataset.value);
 
-                    star.classList.toggle(
-                        "active",
-                        value <= reviewRating
-                    );
+                stars.forEach(
+                    function (item) {
 
-                }
-            );
+                        if (
+                            Number(item.dataset.value)
+                            <= reviewRating
+                        ) {
 
-        }
+                            item.textContent = "★";
+                            item.classList.add("active");
 
-        reviewRating = 5;
-        updateStars();
+                        } else {
 
-        stars.forEach(
-            function (star) {
+                            item.textContent = "☆";
+                            item.classList.remove("active");
 
-                star.addEventListener(
-                    "click",
-                    function () {
-
-                        reviewRating =
-                            Number(
-                                this.dataset.value
-                            );
-
-                        updateStars();
+                        }
 
                     }
                 );
@@ -984,110 +487,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
 
-    }
+    });
 
 
-    /* =====================================================
-       REVIEW FILE PREVIEW
-    ===================================================== */
-
-    const reviewFiles =
-        document.getElementById(
-            "reviewFiles"
-        );
-
-    const reviewFilesPreview =
-        document.getElementById(
-            "reviewFilesPreview"
-        );
-
-    function renderReviewFiles(files) {
-
-        if (!reviewFilesPreview) {
-            return;
-        }
-
-        reviewFilesPreview.innerHTML = "";
-
-        Array.from(files || [])
-            .forEach(function (file) {
-
-                const box =
-                    document.createElement(
-                        "div"
-                    );
-
-                box.className =
-                    "preview-item";
-
-                if (
-                    file.type.startsWith(
-                        "image/"
-                    )
-                ) {
-
-                    const img =
-                        document.createElement(
-                            "img"
-                        );
-
-                    img.src =
-                        URL.createObjectURL(
-                            file
-                        );
-
-                    box.appendChild(img);
-
-                } else if (
-                    file.type.startsWith(
-                        "video/"
-                    )
-                ) {
-
-                    const video =
-                        document.createElement(
-                            "video"
-                        );
-
-                    video.src =
-                        URL.createObjectURL(
-                            file
-                        );
-
-                    video.controls = true;
-
-                    box.appendChild(video);
-
-                }
-
-                reviewFilesPreview.appendChild(
-                    box
-                );
-
-            });
-
-    }
-
-
-    if (reviewFiles) {
-
-        reviewFiles.addEventListener(
-            "change",
-            function () {
-
-                renderReviewFiles(
-                    this.files
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       REVIEW SUBMIT
-    ===================================================== */
+    /* ================= REVIEW SUBMISSION ================= */
 
     if (reviewForm) {
 
@@ -1097,64 +500,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 event.preventDefault();
 
-                const submitButton =
+                const button =
                     reviewForm.querySelector(
                         'button[type="submit"]'
                     );
 
-                if (submitButton) {
-
-                    submitButton.disabled =
-                        true;
-
-                    submitButton.textContent =
-                        "Sending...";
-
-                }
-
-                const name =
-                    document.getElementById(
-                        "reviewName"
-                    ).value;
-
-                const city =
-                    document.getElementById(
-                        "reviewCity"
-                    ).value;
-
-                const text =
-                    document.getElementById(
-                        "reviewText"
-                    ).value;
+                button.disabled = true;
+                button.textContent = "Sending...";
 
                 const formData =
-                    new FormData(
-                        reviewForm
-                    );
+                    new FormData(reviewForm);
 
                 formData.append(
                     "rating",
                     reviewRating
                 );
 
-                formData.append(
-                    "_subject",
-                    "New ShiftMate Customer Review"
-                );
-
-                formData.append(
-                    "_template",
-                    "table"
-                );
-
                 fetch(
-                    "https://formsubmit.co/ajax/shiftmate011@gmail.com",
+                    "https://formsubmit.co/ajax/kikku20041127@gmail.com",
                     {
                         method: "POST",
                         body: formData,
                         headers: {
-                            "Accept":
-                                "application/json"
+                            "Accept": "application/json"
                         }
                     }
                 )
@@ -1162,9 +530,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(function (response) {
 
                     if (!response.ok) {
-                        throw new Error(
-                            "Review failed"
-                        );
+                        throw new Error("Failed");
                     }
 
                     return response.json();
@@ -1173,108 +539,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 .then(function () {
 
-                    const empty =
-                        reviewsList.querySelector(
-                            ".testimonial-empty"
-                        );
-
-                    if (empty) {
-                        empty.remove();
-                    }
-
-                    const card =
-                        document.createElement(
-                            "div"
-                        );
-
-                    card.className =
-                        "testimonial-card";
-
-                    const stars =
-                        "★".repeat(
-                            reviewRating
-                        ) +
-                        "☆".repeat(
-                            5 - reviewRating
-                        );
-
-                    card.innerHTML = `
-                        <h3>${escapeHTML(name)}</h3>
-                        <div class="testimonial-city">
-                            ${escapeHTML(city)}
-                        </div>
-                        <div class="stars">
-                            ${stars}
-                        </div>
-                        <p>
-                            ${escapeHTML(text)}
-                        </p>
-                    `;
-
-                    if (reviewsList) {
-                        reviewsList.prepend(card);
-                    }
+                    alert(
+                        "Thank you! Your review has been submitted."
+                    );
 
                     reviewForm.reset();
 
-                    reviewRating = 5;
+                    reviewModal.classList.remove("show");
 
-                    if (reviewStars) {
-
-                        reviewStars
-                            .querySelectorAll(
-                                ".star"
-                            )
-                            .forEach(
-                                function (star) {
-
-                                    const value =
-                                        Number(
-                                            star.dataset.value
-                                        );
-
-                                    star.classList.toggle(
-                                        "active",
-                                        value <= 5
-                                    );
-
-                                }
-                            );
-
-                    }
-
-                    closeReview();
-
-                    if (submitButton) {
-
-                        submitButton.disabled =
-                            false;
-
-                        submitButton.textContent =
-                            "Submit Review";
-
-                    }
-
-                    alert(
-                        "Thank you for sharing your review!"
+                    reviewModal.setAttribute(
+                        "aria-hidden",
+                        "true"
                     );
+
+                    button.disabled = false;
+
+                    button.textContent =
+                        "Submit Review";
 
                 })
 
                 .catch(function () {
 
-                    if (submitButton) {
+                    button.disabled = false;
 
-                        submitButton.disabled =
-                            false;
-
-                        submitButton.textContent =
-                            "Submit Review";
-
-                    }
+                    button.textContent =
+                        "Submit Review";
 
                     alert(
-                        "There was a problem submitting your review. Please try again."
+                        "Unable to submit your review. Please try again."
                     );
 
                 });
@@ -1286,313 +579,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       ESCAPE HTML
-    ===================================================== */
-
-    function escapeHTML(value) {
-
-        return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-
-    }
-
-
-    /* =====================================================
-       MAP
-    ===================================================== */
+       MAP LOCATION PICKER
+       ===================================================== */
 
     let mapPicker = null;
     let mapMarker = null;
-
     let mapPickerTarget = "from";
 
-    const mapModal =
-        document.getElementById(
-            "mapModal"
-        );
+    const INDIA_CENTER =
+        [22.9734, 78.6569];
 
-    const closeMapModal =
-        document.getElementById(
-            "closeMapModal"
-        );
+
+    const mapModal =
+        document.getElementById("mapModal");
 
     const mapSearchInput =
-        document.getElementById(
-            "mapSearchInput"
-        );
+        document.getElementById("mapSearchInput");
 
     const mapSearchBtn =
-        document.getElementById(
-            "mapSearchBtn"
-        );
+        document.getElementById("mapSearchBtn");
 
     const mapSearchResults =
-        document.getElementById(
-            "mapSearchResults"
-        );
+        document.getElementById("mapSearchResults");
 
+    const closeMapModal =
+        document.getElementById("closeMapModal");
 
-    /* =====================================================
-       ADDRESS FORMAT
-    ===================================================== */
-
-    function formatAddress(data) {
-
-        if (!data) return "";
-
-        const address =
-            data.address || {};
-
-        const parts = [
-
-            address.house_number,
-            address.road,
-            address.neighbourhood,
-            address.suburb,
-            address.city ||
-            address.town ||
-            address.village,
-            address.state,
-            address.postcode,
-            address.country
-
-        ].filter(Boolean);
-
-        return (
-            parts.join(", ") ||
-            data.display_name ||
-            ""
-        );
-
-    }
-
-
-    /* =====================================================
-       SELECT MAP LOCATION
-    ===================================================== */
-
-    function selectLocation(
-        lat,
-        lng,
-        displayAddress
-    ) {
-
-        if (!mapPicker) return;
-
-        mapPicker.setView(
-            [lat, lng],
-            16,
-            {
-                animate:true
-            }
-        );
-
-        if (!mapMarker) {
-
-            mapMarker =
-                L.marker(
-                    [lat, lng]
-                ).addTo(
-                    mapPicker
-                );
-
-        } else {
-
-            mapMarker.setLatLng(
-                [lat, lng]
-            );
-
-        }
-
-        const target =
-            document.getElementById(
-                mapPickerTarget
-            );
-
-        if (target) {
-
-            target.value =
-                displayAddress ||
-                `${lat}, ${lng}`;
-
-        }
-
-        closeMap();
-
-    }
-
-
-    /* =====================================================
-       OPEN MAP
-    ===================================================== */
-
-    function openMap(targetFieldId) {
-
-        if (!mapModal) return;
-
-        mapPickerTarget =
-            targetFieldId || "from";
-
-        mapModal.classList.add(
-            "open"
-        );
-
-        mapModal.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-
-        if (!window.L) {
-
-            alert(
-                "Map library is not available right now."
-            );
-
-            return;
-
-        }
-
-        if (!mapPicker) {
-
-            mapPicker =
-                L.map("map", {
-                    zoomControl:true
-                }).setView(
-                    [26.8467,80.9462],
-                    6
-                );
-
-            L.tileLayer(
-                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                {
-                    attribution:
-                        "&copy; OpenStreetMap contributors"
-                }
-            ).addTo(
-                mapPicker
-            );
-
-            mapMarker =
-                L.marker(
-                    [26.8467,80.9462]
-                ).addTo(
-                    mapPicker
-                );
-
-            mapPicker.on(
-                "click",
-                function (event) {
-
-                    const lat =
-                        event.latlng.lat;
-
-                    const lng =
-                        event.latlng.lng;
-
-                    if (mapMarker) {
-                        mapMarker.setLatLng(
-                            [lat,lng]
-                        );
-                    }
-
-                    fetch(
-                        "https://nominatim.openstreetmap.org/reverse?" +
-                        new URLSearchParams({
-
-                            format:"jsonv2",
-
-                            lat:lat,
-
-                            lon:lng,
-
-                            zoom:"18",
-
-                            addressdetails:"1",
-
-                            "accept-language":"en"
-
-                        })
-                    )
-
-                    .then(
-                        response =>
-                            response.json()
-                    )
-
-                    .then(
-                        data => {
-
-                            selectLocation(
-                                lat,
-                                lng,
-                                formatAddress(data)
-                            );
-
-                        }
-                    )
-
-                    .catch(
-                        function () {
-
-                            selectLocation(
-                                lat,
-                                lng,
-                                `${lat}, ${lng}`
-                            );
-
-                        }
-                    );
-
-                }
-            );
-
-        }
-
-        setTimeout(
-            function () {
-
-                mapPicker.invalidateSize();
-
-            },
-            150
-        );
-
-        if (mapSearchInput) {
-
-            mapSearchInput.value = "";
-
-            mapSearchInput.focus();
-
-        }
-
-        if (mapSearchResults) {
-
-            mapSearchResults.innerHTML =
-                "";
-
-            mapSearchResults.style.display =
-                "none";
-
-        }
-
-    }
-
-
-    /* =====================================================
-       CLOSE MAP
-    ===================================================== */
 
     function closeMap() {
 
-        if (!mapModal) return;
+        if (!mapModal) {
+            return;
+        }
 
-        mapModal.classList.remove(
-            "open"
-        );
+        mapModal.classList.remove("open");
 
         mapModal.setAttribute(
             "aria-hidden",
@@ -1602,22 +622,426 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =====================================================
-       MAP BUTTONS
-    ===================================================== */
+    function setMapAddress(address) {
+
+        const target =
+            document.getElementById(
+                mapPickerTarget
+            );
+
+        if (target) {
+
+            target.value = address;
+
+            target.dispatchEvent(
+                new Event(
+                    "input",
+                    {
+                        bubbles: true
+                    }
+                )
+            );
+
+        }
+
+        closeMap();
+
+    }
+
+
+    function escapeHtml(text) {
+
+        const div =
+            document.createElement("div");
+
+        div.textContent =
+            text || "";
+
+        return div.innerHTML;
+
+    }
+
+
+    function createAddress(data, lat, lon) {
+
+        const address =
+            data && data.address
+                ? data.address
+                : {};
+
+        const parts = [
+
+            address.house_number,
+
+            address.road,
+
+            address.neighbourhood,
+
+            address.suburb,
+
+            address.city ||
+            address.town ||
+            address.village ||
+            address.municipality,
+
+            address.state_district,
+
+            address.state,
+
+            address.postcode
+
+        ].filter(Boolean);
+
+        return (
+            parts.join(", ")
+            ||
+            data.display_name
+            ||
+            `${lat.toFixed(6)}, ${lon.toFixed(6)}`
+        );
+
+    }
+
+
+    function reverseGeocode(lat, lon) {
+
+        const url =
+            "https://nominatim.openstreetmap.org/reverse" +
+            "?format=jsonv2" +
+            "&lat=" + encodeURIComponent(lat) +
+            "&lon=" + encodeURIComponent(lon) +
+            "&zoom=18" +
+            "&addressdetails=1";
+
+        fetch(url, {
+
+            headers: {
+                "Accept-Language":
+                    "en-IN,en"
+            }
+
+        })
+
+        .then(function (response) {
+
+            if (!response.ok) {
+                throw new Error("Reverse geocoding failed");
+            }
+
+            return response.json();
+
+        })
+
+        .then(function (data) {
+
+            const address =
+                createAddress(
+                    data,
+                    lat,
+                    lon
+                );
+
+            setMapAddress(address);
+
+        })
+
+        .catch(function () {
+
+            setMapAddress(
+                `${lat.toFixed(6)}, ${lon.toFixed(6)}`
+            );
+
+        });
+
+    }
+
+
+    function showSearchResults(results) {
+
+        if (!mapSearchResults) {
+            return;
+        }
+
+        mapSearchResults.innerHTML = "";
+
+        if (!results.length) {
+
+            mapSearchResults.innerHTML =
+                '<div class="map-no-results">' +
+                'No location found. Try another address.' +
+                '</div>';
+
+            return;
+
+        }
+
+
+        results.forEach(
+            function (result) {
+
+                const button =
+                    document.createElement("button");
+
+                button.type = "button";
+
+                button.className =
+                    "map-search-result";
+
+                button.innerHTML =
+                    '<i class="fa-solid fa-location-dot"></i>' +
+                    '<span>' +
+                    escapeHtml(
+                        result.display_name
+                    ) +
+                    '</span>';
+
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const lat =
+                            parseFloat(result.lat);
+
+                        const lon =
+                            parseFloat(result.lon);
+
+
+                        if (mapPicker) {
+
+                            mapPicker.setView(
+                                [lat, lon],
+                                16
+                            );
+
+                        }
+
+
+                        if (mapMarker) {
+
+                            mapMarker.setLatLng(
+                                [lat, lon]
+                            );
+
+                        }
+
+
+                        setMapAddress(
+                            result.display_name
+                        );
+
+                    }
+                );
+
+
+                mapSearchResults.appendChild(
+                    button
+                );
+
+            }
+        );
+
+    }
+
+
+    function searchLocation() {
+
+        if (!mapSearchInput) {
+            return;
+        }
+
+        const query =
+            mapSearchInput.value.trim();
+
+
+        if (query.length < 2) {
+
+            mapSearchResults.innerHTML =
+                '<div class="map-no-results">' +
+                'Type at least 2 characters.' +
+                '</div>';
+
+            return;
+
+        }
+
+
+        mapSearchResults.innerHTML =
+            '<div class="map-no-results">' +
+            'Searching...' +
+            '</div>';
+
+
+        const url =
+            "https://nominatim.openstreetmap.org/search" +
+            "?format=jsonv2" +
+            "&addressdetails=1" +
+            "&limit=6" +
+            "&countrycodes=in" +
+            "&q=" +
+            encodeURIComponent(query);
+
+
+        fetch(url, {
+
+            headers: {
+                "Accept-Language":
+                    "en-IN,en"
+            }
+
+        })
+
+        .then(function (response) {
+
+            if (!response.ok) {
+                throw new Error("Search failed");
+            }
+
+            return response.json();
+
+        })
+
+        .then(function (results) {
+
+            showSearchResults(results);
+
+        })
+
+        .catch(function () {
+
+            mapSearchResults.innerHTML =
+                '<div class="map-no-results">' +
+                'Search temporarily unavailable. ' +
+                'You can tap directly on the map.' +
+                '</div>';
+
+        });
+
+    }
+
+
+    function openMapSelector(target) {
+
+        if (!mapModal) {
+            return;
+        }
+
+        mapPickerTarget =
+            target || "from";
+
+
+        mapModal.classList.add("open");
+
+        mapModal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        if (mapSearchInput) {
+            mapSearchInput.value = "";
+            mapSearchInput.focus();
+        }
+
+
+        if (mapSearchResults) {
+            mapSearchResults.innerHTML = "";
+        }
+
+
+        if (!window.L) {
+
+            alert(
+                "Map library could not be loaded. Please refresh the page."
+            );
+
+            return;
+
+        }
+
+
+        if (!mapPicker) {
+
+            mapPicker =
+                L.map(
+                    "map",
+                    {
+                        zoomControl: true
+                    }
+                ).setView(
+                    INDIA_CENTER,
+                    5
+                );
+
+
+            L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+                    attribution:
+                        "&copy; OpenStreetMap contributors",
+
+                    maxZoom: 19
+                }
+            ).addTo(mapPicker);
+
+
+            mapMarker =
+                L.marker(
+                    INDIA_CENTER
+                ).addTo(mapPicker);
+
+
+            mapPicker.on(
+                "click",
+                function (event) {
+
+                    const lat =
+                        event.latlng.lat;
+
+                    const lon =
+                        event.latlng.lng;
+
+
+                    mapMarker.setLatLng(
+                        [lat, lon]
+                    );
+
+
+                    reverseGeocode(
+                        lat,
+                        lon
+                    );
+
+                }
+            );
+
+        }
+
+
+        setTimeout(
+            function () {
+
+                mapPicker.invalidateSize();
+
+            },
+            200
+        );
+
+    }
+
 
     document
-        .querySelectorAll(
-            ".map-target-btn"
-        )
+        .querySelectorAll(".map-target-btn")
         .forEach(function (button) {
 
             button.addEventListener(
                 "click",
                 function () {
 
-                    openMap(
-                        button.dataset.target
+                    openMapSelector(
+                        button.getAttribute(
+                            "data-target"
+                        )
                     );
 
                 }
@@ -1635,6 +1059,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
     if (mapModal) {
 
         mapModal.addEventListener(
@@ -1645,187 +1070,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     event.target ===
                     mapModal
                 ) {
+
                     closeMap();
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       MAP SEARCH
-    ===================================================== */
-
-    let searchTimer = null;
-
-    function searchMap() {
-
-        if (!mapSearchInput) return;
-
-        const query =
-            mapSearchInput.value.trim();
-
-        if (query.length < 3) {
-
-            if (mapSearchResults) {
-
-                mapSearchResults.innerHTML =
-                    '<div class="map-search-empty">Type at least 3 characters.</div>';
-
-                mapSearchResults.style.display =
-                    "block";
-
-            }
-
-            return;
-
-        }
-
-        if (mapSearchResults) {
-
-            mapSearchResults.innerHTML =
-                '<div class="map-search-empty">Searching...</div>';
-
-            mapSearchResults.style.display =
-                "block";
-
-        }
-
-        const params =
-            new URLSearchParams({
-
-                q:query,
-
-                format:"jsonv2",
-
-                addressdetails:"1",
-
-                limit:"6",
-
-                countrycodes:"in",
-
-                "accept-language":"en"
-
-            });
-
-        fetch(
-            "https://nominatim.openstreetmap.org/search?" +
-            params.toString()
-        )
-
-        .then(
-            response =>
-                response.json()
-        )
-
-        .then(
-            results => {
-
-                if (!mapSearchResults) {
-                    return;
-                }
-
-                mapSearchResults.innerHTML =
-                    "";
-
-                if (
-                    !results ||
-                    results.length === 0
-                ) {
-
-                    mapSearchResults.innerHTML =
-                        '<div class="map-search-empty">No matching location found. Try another search.</div>';
-
-                    mapSearchResults.style.display =
-                        "block";
-
-                    return;
 
                 }
-
-                results.forEach(
-                    function (result) {
-
-                        const button =
-                            document.createElement(
-                                "button"
-                            );
-
-                        button.type =
-                            "button";
-
-                        button.className =
-                            "map-search-result";
-
-                        button.innerHTML = `
-                            <i class="fa-solid fa-location-dot"></i>
-                            <span class="map-result-text">
-                                <strong>
-                                    ${escapeHTML(
-                                        result.name ||
-                                        result.display_name.split(",")[0]
-                                    )}
-                                </strong>
-                                <small>
-                                    ${escapeHTML(
-                                        result.display_name
-                                    )}
-                                </small>
-                            </span>
-                        `;
-
-                        button.addEventListener(
-                            "click",
-                            function () {
-
-                                const lat =
-                                    Number(
-                                        result.lat
-                                    );
-
-                                const lng =
-                                    Number(
-                                        result.lon
-                                    );
-
-                                selectLocation(
-                                    lat,
-                                    lng,
-                                    formatAddress(
-                                        result
-                                    )
-                                );
-
-                            }
-                        );
-
-                        mapSearchResults.appendChild(
-                            button
-                        );
-
-                    }
-                );
-
-                mapSearchResults.style.display =
-                    "block";
-
-            }
-        )
-
-        .catch(
-            function () {
-
-                if (!mapSearchResults) {
-                    return;
-                }
-
-                mapSearchResults.innerHTML =
-                    '<div class="map-search-empty">Search is temporarily unavailable. You can still tap the map.</div>';
-
-                mapSearchResults.style.display =
-                    "block";
 
             }
         );
@@ -1837,7 +1085,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         mapSearchBtn.addEventListener(
             "click",
-            searchMap
+            searchLocation
         );
 
     }
@@ -1846,33 +1094,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (mapSearchInput) {
 
         mapSearchInput.addEventListener(
-            "input",
-            function () {
-
-                clearTimeout(
-                    searchTimer
-                );
-
-                searchTimer =
-                    setTimeout(
-                        searchMap,
-                        650
-                    );
-
-            }
-        );
-
-        mapSearchInput.addEventListener(
             "keydown",
             function (event) {
 
-                if (
-                    event.key === "Enter"
-                ) {
+                if (event.key === "Enter") {
 
                     event.preventDefault();
 
-                    searchMap();
+                    searchLocation();
 
                 }
 
@@ -1882,24 +1111,97 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =====================================================
-       ESC KEY
-    ===================================================== */
+    /* ================= ESCAPE ================= */
 
-    document.addEventListener(
+    window.addEventListener(
         "keydown",
         function (event) {
 
-            if (
-                event.key !== "Escape"
-            ) {
+            if (event.key !== "Escape") {
                 return;
             }
 
             closeMap();
-            closeQuestion();
-            closeReview();
-            closeGallery();
+
+            if (galleryModal) {
+
+                galleryModal.classList.remove(
+                    "show"
+                );
+
+            }
+
+            if (reviewModal) {
+
+                reviewModal.classList.remove(
+                    "show"
+                );
+
+            }
+
+            if (questionModal) {
+
+                questionModal.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* ================= BACK TO TOP ================= */
+
+    const backTop =
+        document.createElement("button");
+
+    backTop.innerHTML =
+        '<i class="fa-solid fa-arrow-up"></i>';
+
+    backTop.className =
+        "back-to-top";
+
+    backTop.setAttribute(
+        "aria-label",
+        "Back to top"
+    );
+
+    document.body.appendChild(
+        backTop
+    );
+
+
+    window.addEventListener(
+        "scroll",
+        function () {
+
+            if (window.scrollY > 500) {
+
+                backTop.classList.add(
+                    "show"
+                );
+
+            } else {
+
+                backTop.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+
+    backTop.addEventListener(
+        "click",
+        function () {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
 
         }
     );
