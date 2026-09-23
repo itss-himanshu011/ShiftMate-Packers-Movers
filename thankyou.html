@@ -1,93 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Thank You | ShiftMate</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
 <style>
-*{box-sizing:border-box;}
+
+*{
+    box-sizing:border-box;
+}
+
 body{
-margin:0;
-font-family:'Poppins',sans-serif;
-background:linear-gradient(135deg,#eff6ff 0%,#ffffff 60%,#fff4ea 100%);
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
+
+    margin:0;
+
+    font-family:'Poppins',sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff 0%,
+            #ffffff 60%,
+            #fff4ea 100%
+        );
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
 }
+
 .thankyou-wrap{
-width:min(760px,100%);
-background:#ffffff;
-border-radius:24px;
-box-shadow:0 18px 55px rgba(11,94,215,.15);
-padding:40px 28px;
-text-align:center;
+
+    width:min(760px,100%);
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    box-shadow:
+        0 18px 55px rgba(11,94,215,.15);
+
+    padding:40px 28px;
+
+    text-align:center;
+
 }
+
 .icon-badge{
-width:88px;
-height:88px;
-border-radius:50%;
-background:#eaf2ff;
-color:#0b5ed7;
-font-size:40px;
-display:flex;
-align-items:center;
-justify-content:center;
-margin:0 auto 18px;
+
+    width:88px;
+    height:88px;
+
+    border-radius:50%;
+
+    background:#eaf2ff;
+
+    color:#0b5ed7;
+
+    font-size:40px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:0 auto 18px;
+
 }
+
 h1{
-margin:0 0 10px;
-font-size:42px;
-color:#0b5ed7;
+
+    margin:0 0 10px;
+
+    font-size:42px;
+
+    color:#0b5ed7;
+
 }
+
 p{
-margin:8px 0;
-color:#555;
-font-size:16px;
-line-height:1.7;
+
+    margin:8px 0;
+
+    color:#555;
+
+    font-size:16px;
+
+    line-height:1.7;
+
 }
+
 .highlight{
-font-weight:600;
-color:#0b5ed7;
+
+    font-weight:600;
+
+    color:#0b5ed7;
+
 }
+
 .actions{
-margin-top:25px;
-display:flex;
-justify-content:center;
-gap:12px;
-flex-wrap:wrap;
+
+    margin-top:25px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
 }
+
 a{
-text-decoration:none;
-padding:12px 22px;
-border-radius:999px;
-font-weight:600;
+
+    text-decoration:none;
+
+    padding:12px 22px;
+
+    border-radius:999px;
+
+    font-weight:600;
+
 }
+
 .home-btn{
-background:#0b5ed7;
-color:#fff;
+
+    background:#0b5ed7;
+
+    color:#fff;
+
 }
+
 .call-btn{
-background:#ff6b00;
-color:#fff;
+
+    background:#ff6b00;
+
+    color:#fff;
+
 }
+
 </style>
+
 </head>
+
+
 <body>
+
+
+<script>
+
+/*
+Thank You page can ONLY be opened after
+successful form submission.
+*/
+
+(function(){
+
+    const submitted =
+        sessionStorage.getItem(
+            "shiftmateSubmitted"
+        );
+
+    if(submitted !== "1"){
+
+        window.location.replace(
+            "index.html#contact"
+        );
+
+        return;
+
+    }
+
+    /*
+    Remove the flag after opening the page.
+    Therefore direct future access won't work.
+    */
+
+    sessionStorage.removeItem(
+        "shiftmateSubmitted"
+    );
+
+})();
+
+</script>
+
+
 <div class="thankyou-wrap">
-<div class="icon-badge">✓</div>
-<h1>Thank You!</h1>
-<p>Your enquiry has been submitted successfully.</p>
-<p class="highlight">Our ShiftMate team will contact you shortly.</p>
-<p>We appreciate your trust in choosing us for your moving needs.</p>
+
+<div class="icon-badge">
+✓
+</div>
+
+<h1>
+Thank You!
+</h1>
+
+<p>
+Your enquiry has been submitted successfully.
+</p>
+
+<p class="highlight">
+Our ShiftMate team will contact you shortly.
+</p>
+
+<p>
+We appreciate your trust in choosing us
+for your moving needs.
+</p>
+
 <div class="actions">
-<a class="home-btn" href="index.html">Back to Home</a>
-<a class="call-btn" href="tel:+917318294180">Call Us Now</a>
+
+<a
+class="home-btn"
+href="index.html">
+
+Back to Home
+
+</a>
+
+<a
+class="call-btn"
+href="tel:+917318294180">
+
+Call Us Now
+
+</a>
+
 </div>
+
 </div>
+
 </body>
+
 </html>
