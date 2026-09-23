@@ -796,40 +796,59 @@ placeholder="Phone Number"
 required>
 
 
+<!-- MOVING FROM -->
+
 <input
-type="text"
-id="from"
-name="from"
-placeholder="Moving From"
-required>
-
-<button
-type="button"
-data-target="from"
-class="map-btn map-target-btn">
-
-<i class="fa-solid fa-location-dot"></i>
-Select From Location
-
-</button>
+    type="text"
+    id="from"
+    name="moving_from"
+    placeholder="Moving From"
+    required>
 
 
 <input
-type="text"
-id="to"
-name="to"
-placeholder="Moving To"
-required>
+    type="text"
+    id="fromPincode"
+    name="moving_from_pincode"
+    placeholder="Moving From Pincode"
+    inputmode="numeric"
+    maxlength="6"
+    pattern="[0-9]{6}"
+    required>
 
-<button
-type="button"
-data-target="to"
-class="map-btn map-target-btn">
 
-<i class="fa-solid fa-location-dot"></i>
-Select To Location
+<!-- MOVING TO -->
 
-</button>
+<input
+    type="text"
+    id="to"
+    name="moving_to"
+    placeholder="Moving To"
+    required>
+
+
+<input
+    type="text"
+    id="toPincode"
+    name="moving_to_pincode"
+    placeholder="Moving To Pincode"
+    inputmode="numeric"
+    maxlength="6"
+    pattern="[0-9]{6}"
+    required>
+
+
+<!-- RECEIVER NUMBER -->
+
+<input
+    type="tel"
+    id="receiverNumber"
+    name="receiver_number"
+    placeholder="Receiver Number"
+    inputmode="numeric"
+    maxlength="10"
+    pattern="[0-9]{10}"
+    required>
 
 
 <!-- DATE -->
@@ -962,7 +981,7 @@ value="thankyou.html">
 <button type="submit">
 
 <i class="fa-solid fa-paper-plane"></i>
-Get Free Quote
+Send now
 
 </button>
 
