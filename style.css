@@ -2333,12 +2333,12 @@ footer p{
 
 }
 
+/* =========================
+   CENTER FOOTER
+========================= */
 
 footer {
     text-align: center !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 footer h3,
@@ -2348,13 +2348,15 @@ footer p {
 }
 
 footer p {
-    max-width: 850px;
     margin-left: auto;
     margin-right: auto;
-    line-height: 1.7;
 }
 
 footer .copyright {
-    width: 100%;
     text-align: center !important;
+}
+
+/* Footer address ko bhi center */
+footer strong {
+    display: inline;
 }
