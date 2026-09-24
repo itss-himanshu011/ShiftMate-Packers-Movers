@@ -1978,7 +1978,10 @@ footer{
 ========================= */
 
 .hero-image{
-    display:none !important;
+    flex:1;
+    display:flex !important;
+    justify-content:center;
+    align-items:center;
 }
 
 
@@ -2359,4 +2362,295 @@ footer .copyright {
 /* Footer address ko bhi center */
 footer strong {
     display: inline;
+}
+
+/* =====================================================
+   FINAL CONTACT DESIGN FIX
+===================================================== */
+
+.contact{
+    padding:100px 20px !important;
+    background:#f3f5ed !important;
+    color:#20251d !important;
+    text-align:center !important;
+}
+
+.contact > h2{
+    font-size:44px !important;
+    color:#505b2b !important;
+    margin-bottom:35px !important;
+    font-weight:800 !important;
+}
+
+.contact-info{
+    max-width:1000px !important;
+    margin:0 auto 35px !important;
+    padding:25px !important;
+
+    background:#fff !important;
+    border-radius:22px !important;
+
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:15px !important;
+
+    box-shadow:0 12px 35px rgba(30,40,20,.10) !important;
+}
+
+.contact-info p{
+    margin:0 !important;
+    padding:16px !important;
+
+    background:#f8faf5 !important;
+    border-radius:13px !important;
+
+    color:#333 !important;
+    font-size:15px !important;
+    text-align:left !important;
+
+    display:flex !important;
+    align-items:flex-start !important;
+    gap:10px !important;
+}
+
+.contact-info p:last-child{
+    grid-column:1 / -1 !important;
+}
+
+.contact-info i{
+    color:#68743a !important;
+    font-size:18px !important;
+    margin-top:3px !important;
+}
+
+.contact-info strong{
+    color:#505b2b !important;
+}
+
+
+/* ================= QUOTE FORM ================= */
+
+#quoteForm{
+    max-width:1050px !important;
+    margin:0 auto !important;
+
+    padding:35px !important;
+
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:17px !important;
+
+    background:#fff !important;
+
+    border-radius:25px !important;
+
+    box-shadow:0 15px 45px rgba(0,0,0,.10) !important;
+
+    text-align:left !important;
+}
+
+
+/* ALL INPUTS */
+
+#quoteForm > input{
+    width:100% !important;
+
+    padding:14px 15px !important;
+
+    border:1px solid #dce1d7 !important;
+    border-radius:11px !important;
+
+    background:#fbfcfa !important;
+
+    color:#222 !important;
+
+    font-size:14px !important;
+
+    outline:none !important;
+}
+
+#quoteForm > input:focus,
+#quoteForm textarea:focus{
+    border-color:#68743a !important;
+
+    box-shadow:
+        0 0 0 3px rgba(104,116,58,.10) !important;
+}
+
+
+/* MAP BUTTON */
+
+#quoteForm .map-target-btn{
+    width:auto !important;
+
+    background:#68743a !important;
+    color:white !important;
+
+    border:none !important;
+    border-radius:10px !important;
+
+    padding:10px 15px !important;
+
+    font-weight:700 !important;
+}
+
+
+/* DATE */
+
+#quoteForm .date-label{
+    grid-column:1 / -1 !important;
+
+    margin:4px 0 -8px !important;
+
+    color:#505b2b !important;
+
+    font-weight:700 !important;
+
+    display:flex !important;
+    align-items:center !important;
+    gap:7px !important;
+}
+
+#quoteForm .date-label i{
+    color:#68743a !important;
+}
+
+#quoteForm #movingDate{
+    grid-column:1 / -1 !important;
+}
+
+
+/* MESSAGE */
+
+#quoteForm textarea{
+    grid-column:1 / -1 !important;
+
+    width:100% !important;
+
+    min-height:130px !important;
+
+    padding:15px !important;
+
+    border:1px solid #dce1d7 !important;
+    border-radius:11px !important;
+
+    background:#fbfcfa !important;
+
+    resize:vertical !important;
+
+    font-size:14px !important;
+}
+
+
+/* UPLOAD */
+
+#quoteForm .upload-group{
+    grid-column:1 / -1 !important;
+
+    margin:3px 0 !important;
+
+    padding:20px !important;
+
+    background:#f8faf5 !important;
+
+    border:1px solid #e1e5dc !important;
+
+    border-radius:16px !important;
+}
+
+#quoteForm .upload-label{
+    color:#505b2b !important;
+
+    font-weight:700 !important;
+
+    margin-bottom:10px !important;
+}
+
+#quoteForm .upload-box{
+    min-height:110px !important;
+
+    border:2px dashed #b8c09f !important;
+
+    border-radius:14px !important;
+
+    background:#fff !important;
+
+    color:#68743a !important;
+}
+
+#quoteForm .upload-box:hover{
+    background:#eef1e3 !important;
+
+    border-color:#68743a !important;
+}
+
+
+/* SUBMIT */
+
+#quoteForm > button[type="submit"]{
+    grid-column:1 / -1 !important;
+
+    width:100% !important;
+
+    min-height:55px !important;
+
+    margin-top:5px !important;
+
+    border:none !important;
+
+    border-radius:12px !important;
+
+    background:#68743a !important;
+
+    color:white !important;
+
+    font-size:16px !important;
+
+    font-weight:800 !important;
+
+    box-shadow:0 10px 25px rgba(104,116,58,.22) !important;
+}
+
+#quoteForm > button[type="submit"]:hover{
+    background:#505b2b !important;
+
+    transform:translateY(-2px);
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+    .contact{
+        padding:70px 14px !important;
+    }
+
+    .contact > h2{
+        font-size:34px !important;
+    }
+
+    .contact-info{
+        grid-template-columns:1fr !important;
+        padding:15px !important;
+    }
+
+    .contact-info p:last-child{
+        grid-column:auto !important;
+    }
+
+    #quoteForm{
+        grid-template-columns:1fr !important;
+        padding:20px !important;
+    }
+
+    #quoteForm > input,
+    #quoteForm textarea,
+    #quoteForm .date-label,
+    #quoteForm #movingDate,
+    #quoteForm .upload-group,
+    #quoteForm > button[type="submit"]{
+        grid-column:1 / -1 !important;
+    }
+
 }
