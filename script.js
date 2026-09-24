@@ -1214,68 +1214,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 });
-/* =========================
-   CUSTOMER REVIEWS
-========================= */
 
-.testimonial-container{
-    display:grid !important;
-    grid-template-columns:repeat(3,1fr);
-    gap:24px;
-    width:100%;
-    max-width:1200px;
-    margin:35px auto 0;
-    padding:0 20px;
-}
-
-.testimonial-card{
-    background:#fff !important;
-    border:1px solid #e2e5d9 !important;
-    border-radius:18px !important;
-    padding:28px !important;
-    min-height:210px;
-    box-shadow:0 8px 25px rgba(0,0,0,.07) !important;
-    text-align:center;
-}
-
-.testimonial-card .stars{
-    color:#68743a;
-    font-size:22px;
-    letter-spacing:3px;
-    margin-bottom:15px;
-}
-
-.testimonial-card p{
-    color:#555;
-    font-size:15px;
-    line-height:1.7;
-    margin:0 0 18px;
-}
-
-.testimonial-card h4{
-    margin:0 0 4px;
-    color:#222;
-    font-size:16px;
-}
-
-.testimonial-card span{
-    color:#777;
-    font-size:13px;
-}
-
-@media(max-width:900px){
-
-    .testimonial-container{
-        grid-template-columns:1fr 1fr;
-    }
-
-}
-
-@media(max-width:600px){
-
-    .testimonial-container{
-        grid-template-columns:1fr;
-        padding:0 10px;
     }
 
 }
