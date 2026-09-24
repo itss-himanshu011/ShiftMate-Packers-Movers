@@ -5,13 +5,11 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Thank You | ShiftMate Packers & Movers</title>
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -25,28 +23,19 @@
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-
     <style>
 
         * {
             box-sizing: border-box;
         }
 
-
         body {
-
             margin: 0;
-
             font-family: 'Poppins', sans-serif;
-
             min-height: 100vh;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             padding: 20px;
 
             background:
@@ -56,14 +45,10 @@
                     #ffffff 50%,
                     #eef1e3 100%
                 );
-
         }
 
-
         .thankyou-wrap {
-
             width: 100%;
-
             max-width: 700px;
 
             background: #ffffff;
@@ -78,14 +63,10 @@
                 0 15px 50px rgba(0, 0, 0, 0.12);
 
             border: 1px solid #e5e8dc;
-
         }
 
-
         .success-icon {
-
             width: 90px;
-
             height: 90px;
 
             margin: 0 auto 25px;
@@ -93,9 +74,7 @@
             border-radius: 50%;
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
             background: #eef1e3;
@@ -106,12 +85,9 @@
 
             box-shadow:
                 0 8px 25px rgba(104, 116, 58, 0.20);
-
         }
 
-
         h1 {
-
             margin: 0 0 12px;
 
             font-size: 42px;
@@ -119,12 +95,9 @@
             font-weight: 800;
 
             color: #68743a;
-
         }
 
-
         .main-message {
-
             margin: 0 auto 10px;
 
             color: #333;
@@ -132,12 +105,9 @@
             font-size: 18px;
 
             line-height: 1.7;
-
         }
 
-
         .sub-message {
-
             margin: 0 auto;
 
             color: #666;
@@ -145,21 +115,14 @@
             font-size: 15px;
 
             line-height: 1.7;
-
         }
-
 
         .highlight {
-
             color: #68743a;
-
             font-weight: 700;
-
         }
 
-
         .actions {
-
             margin-top: 30px;
 
             display: flex;
@@ -171,12 +134,9 @@
             gap: 14px;
 
             flex-wrap: wrap;
-
         }
 
-
         .action-btn {
-
             display: inline-flex;
 
             align-items: center;
@@ -198,48 +158,29 @@
             font-weight: 600;
 
             transition: 0.3s ease;
-
         }
-
 
         .home-btn {
-
             background: #68743a;
-
             color: #ffffff;
-
         }
-
 
         .home-btn:hover {
-
             background: #505b2b;
-
             transform: translateY(-2px);
-
         }
-
 
         .call-btn {
-
             background: #25D366;
-
             color: #ffffff;
-
         }
-
 
         .call-btn:hover {
-
             background: #1ebe5d;
-
             transform: translateY(-2px);
-
         }
 
-
         .brand {
-
             margin-top: 30px;
 
             padding-top: 20px;
@@ -249,142 +190,57 @@
             color: #777;
 
             font-size: 13px;
-
         }
-
 
         .brand strong {
-
             color: #68743a;
-
         }
-
 
         @media (max-width: 600px) {
 
             .thankyou-wrap {
-
                 padding: 40px 22px;
-
             }
-
 
             .success-icon {
-
                 width: 75px;
-
                 height: 75px;
-
                 font-size: 34px;
-
             }
-
 
             h1 {
-
                 font-size: 32px;
-
             }
-
 
             .main-message {
-
                 font-size: 16px;
-
             }
-
 
             .actions {
-
                 flex-direction: column;
-
             }
-
 
             .action-btn {
-
                 width: 100%;
-
                 max-width: 280px;
-
             }
-
         }
 
     </style>
 
 </head>
 
-
 <body>
-
-
-    <!--
-        IMPORTANT:
-
-        This page should ONLY appear after
-        a successful quote submission.
-
-        If someone directly opens thankyou.html,
-        they will be redirected to the contact section.
-    -->
-
-    <script>
-
-        (function () {
-
-            const submitted =
-                sessionStorage.getItem(
-                    "shiftmateSubmitted"
-                );
-
-
-            if (submitted !== "1") {
-
-                window.location.replace(
-                    "index.html#contact"
-                );
-
-                return;
-
-            }
-
-
-            /*
-                Remove the flag after successful
-                entry so the Thank You page cannot
-                simply be reopened later.
-            */
-
-            sessionStorage.removeItem(
-                "shiftmateSubmitted"
-            );
-
-        })();
-
-    </script>
-
 
     <div class="thankyou-wrap">
 
-
-        <!-- SUCCESS ICON -->
-
         <div class="success-icon">
-
             <i class="fa-solid fa-check"></i>
-
         </div>
-
-
-        <!-- HEADING -->
 
         <h1>
             Thank You!
         </h1>
-
-
-        <!-- MESSAGE -->
 
         <p class="main-message">
 
@@ -392,7 +248,6 @@
             <strong>successfully.</strong>
 
         </p>
-
 
         <p class="sub-message">
 
@@ -404,7 +259,6 @@
 
         </p>
 
-
         <p class="sub-message">
 
             We appreciate your trust in
@@ -412,11 +266,7 @@
 
         </p>
 
-
-        <!-- BUTTONS -->
-
         <div class="actions">
-
 
             <a
                 href="index.html"
@@ -428,7 +278,6 @@
 
             </a>
 
-
             <a
                 href="tel:+917318294180"
                 class="action-btn call-btn">
@@ -439,11 +288,7 @@
 
             </a>
 
-
         </div>
-
-
-        <!-- BRAND -->
 
         <div class="brand">
 
@@ -457,9 +302,7 @@
 
         </div>
 
-
     </div>
-
 
 </body>
 
