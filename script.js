@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     new FormData(questionForm);
 
                 fetch(
-                    "https://formsubmit.co/ajax/kikku20041127@gmail.com",
+                    "https://formsubmit.co/ajax/shiftmate011@gmail.com",
                     {
                         method: "POST",
                         body: formData,
@@ -437,7 +437,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
                 fetch(
-                    "https://formsubmit.co/ajax/kikku20041127@gmail.com",
+                    "https://formsubmit.co/ajax/shiftmate011@gmail.com",
                     {
                         method: "POST",
                         body: formData,
